@@ -34,18 +34,56 @@ Japanese **[Documents](https://wiki.kek.jp/display/geant4/Geant4+Tutorial+for+Me
 tar zxvf PTSproject-104-002-001-20190408.tar.gz
 
 # Build PTSIM
-cd PTSproject-install/PTSapps/DynamicPort
+cd PTSproject
 ## Build library
 ./buildToolkitIAEA.sh
 ## Build application
 ./buildDynamicIAEA.sh
 
+```
+
+
+![Directory Structure](/asset/Directory_structure.png "Directory Structure")
+
+
+``` bash
 # In DynamicPort directory (workspace) 
-cd PTS
+cd PTSproject-install/PTSapps/DynamicPort
+
+# Simulation and get data collection as root file
 ## with**out** simulated render
 ./bin/PTSdemo -m <filename>
 ## with simulated render
 ./bin/PTSdemo -u Qt -i <filename>
+
+# Edit file
+emacs <filename>
+
+```
+
+## Simulation Part and Code description
+``` bash
+[WARNING] You must do IF you download my file *Sample6.mac*
+./bin/PTSdemo -m Sample6.mac
+
+# Edit Sample file
+emace Sample.mac
+-- inside file --
+...
+/vis ...  //can comment if you don't want render
+/run/beamOn <number of beam>
+...
+-----------------
+
+# Edit radiation parameters
+emacs /macros/DynamicPort/particleGun.mac
+-- inside file --
+/gun/particle <proton|gamma>
+/gun/energy <int>. MeV
+/gun/position <x> <y> <z> mm
+/gun/direction <px> <py> <pz>
+-----------------
+
 ```
 
 ## Github Guide(Linux/Windows)
