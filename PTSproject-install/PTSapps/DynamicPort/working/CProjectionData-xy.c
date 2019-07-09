@@ -1,0 +1,176 @@
+//Sinogram
+{
+        // input file name
+        //TFile f("../Sample.root");
+        
+        // for csv file of xy
+        
+        //TTree* tree = (TTree*)f.Get("TUBD");
+  
+        TChain *tree = new TChain("TUBD");
+	tree->Add("Sample6_t*");
+	cout << tree->GetNtrees() << "\nfiles readed" << endl;
+
+        Float_t px = 0.;
+        Float_t py = 0.;
+        Float_t x = 0.;
+        Float_t y = 0.;
+	Float_t ke = 0.;
+        Int_t pid = 0;
+        
+        tree->SetBranchAddress("px", &px);
+        tree->SetBranchAddress("py", &py);
+        tree->SetBranchAddress("x", &x);
+        tree->SetBranchAddress("y", &y);
+        tree->SetBranchAddress("pid", &pid);
+	tree->SetBranchAddress("ke", &ke);
+        
+        Double_t s = 0.;
+        Double_t s2 = 0.;
+        Double_t theta = 0.;
+        Double_t iRadian = 0.;
+        
+        Double_t sX = 0.;
+        Double_t sY = 0.;
+        
+	//Plane
+        TCanvas* c = new TCanvas("c", "c", 0, 0, 720, 720);
+        //c->Divide(2, 2); 
+        //--  1 pixel -> 1mm
+    
+        TH1* s_mm = new TH1F("s_mm", "s /mm", 512 , -256, 256);
+        TH1* theta_deg = new TH1F("theta_deg", "theta /deg", 512 , 0, 360);
+
+        TH2* preCPro = new TH2F("preCPro", "preProjectionData", 512, 0, 256, 512, 0, 360);
+        TH2* CPro = new TH2F("CPro", "ProjectionData-XY", 512, -256, 256, 512, 0, 360);
+    
+        //Calculate Sx Sy theta from x0,y0,px,py
+    
+        Int_t nEntry = tree->GetEntries();
+        
+        for(Int_t iEntry=0; iEntry<nEntry; ++iEntry)
+        {
+            tree->GetEntry(iEntry);
+	    //if(pid==22&&(ke>=4300&&ke<=4600)||(ke>=5100&&ke<=5400)||(ke>=6000&&ke<=6200)||(ke>=6800&&ke<=7200))
+	    if(pid==22)
+            {
+                
+                if(px!=0.0 && py!=0.0)
+                {
+                    sX = ((y-x*(py/px))/((-1)*(py/px)-(px/py)));
+                    sY = ((x-y*(px/py))/((-1)*(py/px)-(px/py)));
+                    
+                    iRadian = TMath::ATan2(sY, sX);
+                }
+                else if(px==0.0 && py!=0.0)
+                {
+                    sX = x;
+                    sY = 0.0;
+                    
+                    if(y>=0.0)
+                    {
+                        iRadian = 0.0;
+                    }
+                    else if(y<0.0)
+                    {
+                        iRadian = TMath::Pi();
+                    }
+                }
+                else if(px!=0.0 && py==0.0)
+                {
+                    sX = 0.0;
+                    sY = y;
+                    
+                    if(x>0.0)
+                    {
+                        iRadian = TMath::Pi() * (-1);
+                    }
+                    else if(x<=0.0)
+                    {
+                        iRadian = TMath::PiOver2();  // PiOver2 = Pi()/2.0
+                    }
+                }
+                
+                s2 = TMath::Power(sX, 2.0) + TMath::Power(sY, 2.0);
+                s = TMath::Sqrt(s2);
+                
+                Double_t subS = (0.0-sX)*(y-sY) - (0.0-sY)*(x-sX);
+                
+                if(subS > 0.0) // left
+                {
+                    s = s*(-1.0);
+                    
+                    iRadian = iRadian - TMath::Pi();
+                    
+                    if(iRadian < (-1)*TMath::Pi())
+                    {
+                        iRadian = iRadian + TMath::TwoPi();
+                    }
+                }
+                else if(subS < 0.0) // right
+                {
+                    ;
+                }
+                else if(subS==0.0)
+                {
+                    if(sX==0.0)
+                    {
+                        s = y;
+                    }
+                    else if(sY==0.0)
+                    {
+                        s = x;
+                    }
+                }
+                
+                theta = iRadian * 180.0 / TMath::Pi();
+                
+                if(theta < 0.)
+                {
+                    theta = theta + 360.0;
+                }
+                
+                s_mm -> Fill(s);
+                theta_deg -> Fill(theta);
+                preCPro -> Fill(s, theta);
+                CPro -> Fill(s, theta);
+                
+                //printf("z0(%10.4f, %10.4f), sZ(%10.4f, %10.4f) %10.4f, %10.4f\n", z, y, sZ, sY, s, theta);  // Test
+            }
+            
+            //roop end
+            
+        }
+        //c->cd(1);
+        //s_mm->Draw();
+        //c->cd(2);
+        //theta_deg->Draw();
+        //c->cd(3);
+        //preCPro->Draw();
+        //c->cd(4);
+
+        CPro->SetStats(0);
+        CPro->GetXaxis()->SetTitle("s");
+        CPro->GetYaxis()->SetTitle("theta");
+        CPro->GetYaxis()->SetTitleOffset(1.30);
+        CPro -> Draw("colz");
+
+        // - csv -------------------------------------------------
+        
+	std::ofstream ofs;
+        ofs.open("./result/SinogramXY.csv");
+        
+        for(Int_t i=1; i<=512; i++)
+        {
+            for(Int_t k=1; k<=512; k++)
+            {
+                Double_t BinContent= CPro->GetBinContent(k, i);
+                //cout << BinContent << endl;
+                ofs << BinContent << endl;
+            }
+        }
+        
+        ofs.close();
+        
+        cout << "save: SinogramXY.csv" << endl;
+}

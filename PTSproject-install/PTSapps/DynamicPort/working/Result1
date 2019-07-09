@@ -1,0 +1,619 @@
+**************************************************************
+Geant4 version Name: geant4-10-04-patch-02    (25-May-2018)
+Copyright : Geant4 Collaboration
+References : NIM A 506 (2003), 250-303
+: IEEE-TNS 53 (2006), 270-278
+: NIM A 835 (2016), 186-225
+WWW : http://geant4.org/
+**************************************************************
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Visualization Manager initialising...
+Registering graphics systems...
+You have successfully registered the following graphics systems.
+Current available graphics systems are:
+ASCIITree (ATree)
+DAWNFILE (DAWNFILE)
+G4HepRep (HepRepXML)
+G4HepRepFile (HepRepFile)
+RayTracer (RayTracer)
+VRML1FILE (VRML1FILE)
+VRML2FILE (VRML2FILE)
+gMocrenFile (gMocrenFile)
+OpenGLImmediateQt (OGLIQt, OGLI)
+OpenGLStoredQt (OGLSQt, OGL, OGLS)
+OpenGLImmediateX (OGLIX, OGLIQt_FALLBACK)
+OpenGLStoredX (OGLSX, OGLSQt_FALLBACK)
+RayTracerX (RayTracerX)
+Registering model factories...
+You have successfully registered the following model factories.
+Registered model factories:
+generic
+drawByAttribute
+drawByCharge
+drawByOriginVolume
+drawByParticleID
+drawByEncounteredVolume
+Registered filter factories:
+attributeFilter
+chargeFilter
+originVolumeFilter
+particleFilter
+encounteredVolumeFilter
+You have successfully registered the following user vis actions.
+Run Duration User Vis Actions: none
+End of Event User Vis Actions: none
+End of Run User Vis Actions: none
+Some /vis commands (optionally) take a string to specify colour.
+"/vis/list" to see available colours.
+Application (System) Name : System has not Selected
+Application (System) version : DynamicPort-104-002-001
+Application (System) release date: (2019-04-08)
+PTStoolkit version:  PTStoolkit-104-002-001
+PTStoolkit release date: (2019-04-08)
+Geant4 version :  $Name: geant4-10-04-patch-02 $
+Geant4 release date: (25-May-2018)
+******* MyActionInitiaization::Build() **********
+/run/verbose 0
+/tracking/verbose 0
+/control/execute ./macros/common/materials.mac
+/G4M/Element/path ./data/common/element
+/G4M/Material/path ./data/common/material
+/G4M/Element/useG4Element TRUE
+/G4M/Material/create Hydrogen
+/G4M/Material/create Aluminium
+/G4M/Material/create Argon
+/G4M/Material/create Chlorine
+/G4M/Material/create Copper
+/G4M/Material/create Gold
+/G4M/Material/create Iron
+/G4M/Material/create Nickel
+/G4M/Material/create Nitrogen
+/G4M/Material/create Oxygen
+/G4M/Material/create Silicon
+/G4M/Material/create Titanium
+/G4M/Material/create lead
+/G4M/Material/create concrete
+/G4M/Material/create Tantalum
+/G4M/Material/create Tungsten
+/G4M/Material/create Lexan
+/G4M/Material/create Carbon
+/G4M/Material/create Acetate
+/G4M/Material/create Acrylic
+/G4M/Material/create Air
+/G4M/Material/create Brass
+/G4M/Material/create Epoxy
+/G4M/Material/create FR-4_Glass_Epoxy
+/G4M/Material/create Gelatin
+/G4M/Material/create H_2O
+/G4M/Material/create KAVLAR
+/G4M/Material/create Kapton
+/G4M/Material/create Mylar
+/G4M/Material/create PETP
+/G4M/Material/create Polyethylene
+/G4M/Material/create Scintillator
+/G4M/Material/create SiO2
+/G4M/Material/create Liver
+/G4M/Material/create Muscle
+/G4M/Material/create Phantom
+/G4M/Material/create SkeletonRibs
+/G4M/Material/create SkeletonSpongiosa
+/G4M/Material/create adiposeTissue
+/G4M/Material/create Breast
+/G4M/Material/create lungExhale
+/G4M/Material/create lungInhale
+/G4M/Material/create trabecularBone
+/G4M/Material/create denseBone
+/G4M/Material/create G10
+/G4M/Material/create Vacuum
+/G4M/Material/create POM
+/G4M/Material/create GSO
+/G4M/Material/create TPCGas
+/G4M/Material/create G4_WATER
+/G4M/Material/create G4_POLYETHYLENE
+/G4M/Material/create G4_AIR
+/G4M/Material/create G4_Fe
+/G4M/Material/create G4_Cu
+/G4M/Material/create G4_Al
+/G4M/Material/create G4_BGO
+/G4M/Material/create G4_POLYACRYLONITRILE
+/G4M/Material/create G4_SILICON_DIOXIDE
+/control/execute ./macros/common/phys.mac
+/My/physics/register G4EmStandardPhysics_option3
+/My/physics/register G4HadronElasticPhysics
+/My/physics/register G4HadronPhysicsFTF_BIC
+/My/physics/register G4StoppingPhysics
+/My/physics/register G4RadioactiveDecayPhysics
+/My/physics/register G4IonBinaryCascadePhysics
+/My/physics/register G4DecayPhysics
+/My/physics/verbose 0
+/G4M/System DynamicPort
++++ System DynamicPort was slected
+DICOMRT
++++ MyDynamicPortSetup
+/control/execute ./macros/DynamicPort/beamModule0.mac
+/Dynamic/Module/register Room G4MRoom ./data/Sample/G4MRoom/room.dat 0. 0. 0. mm 0. 0. 0. deg
+/Dynamic/Module/register Extract G4MDisk ./data/Sample/G4MDisk/extract.dat 0. 0. 3500. mm 0. 0. 0. deg
+/Dynamic/Module/register Scatter G4MDisk ./data/Sample/G4MDisk/scatter.dat 0. 0. 2700. mm 0. 0. 0. deg
+/Dynamic/Module/register WobblerX G4MWobblerMagnet ./data/Sample/G4MWobblerMagnet/wobblerX.dat 0. 0. 3200. mm 0. 0. 0. deg
+/Dynamic/Module/register WobblerY G4MWobblerMagnet ./data/Sample/G4MWobblerMagnet/wobblerY.dat 0. 0. 3000. mm 0. 0. 0. deg
+/Dynamic/Module/register RidgeFilter G4MRidgeFilter ./data/Sample/G4MRidgeFilter/ridge.dat 0. 0. 2500. mm 0. 0. 0. deg
+/Dynamic/Module/register Propeller G4MPropellerBlades ./data/Sample/G4MPropellerBlades/blade.dat 0. 0. 2700. mm 0. 0. 0. deg
+/Dynamic/Module/register RangeShifter G4MBox ./data/Sample/G4MBox/degrader.dat 0. 0. 2500. mm 0. 0. 0. deg
+/Dynamic/Module/register MainMonitor G4MTubsMonitor ./data/Sample/G4MTubsMonitor/mainmonitor.dat 0. 0. 2200. mm 0. 0. 0. deg
+/Dynamic/Module/register SecondMonitor G4MTubsMonitor ./data/Sample/G4MTubsMonitor/secondmonitor.dat 0. 0. 2000. mm 0. 0. 0. deg
+/Dynamic/Module/register FlatMonitor G4MTubsMonitor ./data/Sample/G4MTubsMonitor/flatmonitor.dat 0. 0. 1700. mm 0. 0. 0. deg
+/Dynamic/Module/register Collimator G4MDiskStructure ./data/Sample/G4MDiskStructure/collimator.dat 0. 0. 1500. mm 0. 0. 0. deg
+/Dynamic/Module/register MLC G4MMLCX ./data/Sample/G4MMLCX/mlc.dat 0. 0. 1000. mm 0. 0. 0. deg
+/Dynamic/Module/register Bolus G4MBolus ./data/Sample/G4MBolus/bolus.dat 0. 0. 700. mm 0. 0. 0. deg
+/Dynamic/Module/register PTCol G4MPTCollimatorEx ./data/Sample/G4MPTCollimatorEx/001.dat 0. 0. 100. mm 0. 0. 0. deg
+/Dynamic/Module/register Couch G4MCouch ./data/Sample/G4MCouch/couch.dat 0. 0. -300. mm 0. 0. 0. deg
+/Dynamic/Module/DICOM/register
+/Dynamic/Module/register WaterPhantom G4MWaterPhantom ./data/Sample/G4MWaterPhantom/waterphantom.dat 0. 0. -250. mm 0. 180. 0. deg
+/Dynamic/Module/updateEvent/wobbling WobblerX WobblerY true
+%% DynamicPortSetup::Wobbling 1
+/run/initialize
++++ DynamicPortSetup::BuildDefault Room
+==>> Constructing ...Room
+MyDynamic PORT SETUP BUILDDEFAULT
++++ G4MVParticleTherapySystem::BuildSDandField 18
+/G4M/Module/list
++++ G4MParticleTherapySystemMessenger  List +++
+* Module Bolus          	 Inactive
+* Module Collimator     	 Inactive
+* Module Couch          	 Inactive
+* Module DICOM          	 Inactive
+* Module Extract        	 Inactive
+* Module FlatMonitor    	 Inactive
+* Module MLC            	 Inactive
+* Module MainMonitor    	 Inactive
+* Module PTCol          	 Inactive
+* Module Propeller      	 Inactive
+* Module RangeShifter   	 Inactive
+* Module RidgeFilter    	 Inactive
+* Module Room           	 Active    Mass-Geom
+* Module Scatter        	 Inactive
+* Module SecondMonitor  	 Inactive
+* Module WaterPhantom   	 Inactive
+* Module WobblerX       	 Inactive
+* Module WobblerY       	 Inactive
+/G4M/Module/Phantom/size 150. 150. 250.0 mm
+/G4M/Module/Phantom/sdsize 150.0 150.0 250.0 mm
+/G4M/Module/Phantom/dim 150. 150. 250.
+/G4M/Module/install WaterPhantom
++++ G4MParticleTherapySystemMessenger    Install WaterPhantom none 1
++++ G4MVParticleTherapySystem::Install WaterPhantom none 1
+==>> Constructing ...WaterPhantom
+++ G4MWaterPhantom::  Create Sensitive Detector WaterPhantom
+/run/geometryModified
+/control/execute macros/DynamicPort/particleGun.mac
+/gun/particle proton
+/gun/energy 190. MeV
+/gun/position 0 0 3500. mm
+/gun/direction 0 0 -1
+/control/execute ./macros/common/Hist.mac
+/My/runaction/hist/enable DICOMCT false
+/My/runaction/hist/enable DICOM false
+/My/runaction/hist/enable JSTEdep false
+/My/runaction/hist/enable JSTDose true
+/My/runaction/hist/enable JST true
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : RunActForHistMsg00
+      issued by : ** MyRunActionForHistMessenger::Enable
+/My/runaction/hist/enable will be only available for JSTEdep, JSTDose, DICOMCT and DICOM in the next release.
+ Use the following command for defining a ntuple: 
+/My/runaction/ntuple/create
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+/My/runaction/ntuple/addColumn JST evno I
+/My/runaction/ntuple/addColumn JST pid I
+/My/runaction/ntuple/addColumn JST de F keV
+/My/runaction/ntuple/addColumn JST ix I
+/My/runaction/ntuple/addColumn JST iy I
+/My/runaction/ntuple/addColumn JST iz I
+/My/runaction/dumpfile Sample0.root
+/control/execute ./macros/common/vis.mac
+/vis/open OGL
+/vis/viewer/set/viewpointThetaPhi -90. 90.
+/vis/drawVolume
+/tracking/storeTrajectory 1
+/vis/scene/add/trajectories
+/tracking/storeTrajectory 1
+Attributes available for modeling and filtering with
+  "/vis/modeling/trajectories/create/drawByAttribute" and
+  "/vis/filtering/trajectories/create/attributeFilter" commands:
+G4TrajectoriesModel:
+  Event ID (EventID): G4int
+  Run ID (RunID): G4int
+G4Trajectory:
+  Charge (Ch): unit: e+ (G4double)
+  Track ID (ID): G4int
+  Initial kinetic energy (IKE): G4BestUnit (G4double)
+  Initial momentum magnitude (IMag): G4BestUnit (G4double)
+  Initial momentum (IMom): G4BestUnit (G4ThreeVector)
+  No. of points (NTP): G4int
+  PDG Encoding (PDG): G4int
+  Parent ID (PID): G4int
+  Particle Name (PN): G4String
+G4TrajectoryPoint:
+  Position (Pos): G4BestUnit (G4ThreeVector)
+WARNING: Trajectory storing has been requested.  This action may be
+  reversed with "/tracking/storeTrajectory 0".
+/vis/scene/notifyHandlers
+/vis/scene/endOfEventAction accumulate
+WARNING: The vis manager will keep up to 100 events.
+  This may use a lot of memory.
+  It may be changed with, e.g., "/vis/scene/endOfEventAction accumulate 10".
+/run/beamOn 10
+=======================================================================
+======       Radioactive Decay Physics Parameters              ========
+=======================================================================
+Max life time                                     1.4427e+06 ps
+Internal e- conversion flag                       1
+Stored internal conversion coefficients           1
+Enable correlated gamma emission                  0
+Max 2J for sampling of angular correlations       10
+Atomic de-excitation enabled                      1
+Auger electron emission enabled                   1
+Auger cascade enabled                             1
+Check EM cuts disabled for atomic de-excitation   0
+Use Bearden atomic level energies                 0
+=======================================================================
+
+====================================================================
+HADRONIC PROCESSES SUMMARY (verbose level                   1)
+---------------------------------------------------
+Hadronic Processes for                            GenericIon
+
+  Process: ionInelastic
+        Model: Binary Light Ion Cascade : 0 eV /n ---> 4 GeV/n
+        Model: FTFP                     : 2 GeV/n ---> 100 TeV/n
+Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+Hadronic Processes for                            He3
+
+  Process: hadElastic
+        Model: hElasticLHEP             : 0 eV /n ---> 100 TeV/n
+Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: He3Inelastic
+        Model: Binary Light Ion Cascade : 0 eV /n ---> 4 GeV/n
+        Model: FTFP                     : 2 GeV/n ---> 100 TeV/n
+Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+Hadronic Processes for                            alpha
+
+  Process: hadElastic
+        Model: hElasticLHEP             : 0 eV /n ---> 100 TeV/n
+Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: alphaInelastic
+        Model: Binary Light Ion Cascade : 0 eV /n ---> 4 GeV/n
+        Model: FTFP                     : 2 GeV/n ---> 100 TeV/n
+Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+Hadronic Processes for                            anti_He3
+
+  Process: hadElastic
+        Model: hElasticLHEP             : 0 eV /n ---> 100.1 MeV/n
+        Model: AntiAElastic             : 100 MeV/n ---> 100 TeV/n
+Cr_sctns: AntiAGlauber             : 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: anti_He3Inelastic
+        Model: FTFP                     : 0 eV /n ---> 100 TeV/n
+Cr_sctns: AntiAGlauber             : 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+  Process: hFritiofCaptureAtRest
+---------------------------------------------------
+Hadronic Processes for                            anti_alpha
+
+  Process: hadElastic
+        Model: hElasticLHEP             : 0 eV /n ---> 100.1 MeV/n
+        Model: AntiAElastic             : 100 MeV/n ---> 100 TeV/n
+Cr_sctns: AntiAGlauber             : 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: anti_alphaInelastic
+        Model: FTFP                     : 0 eV /n ---> 100 TeV/n
+Cr_sctns: AntiAGlauber             : 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+  Process: hFritiofCaptureAtRest
+---------------------------------------------------
+Hadronic Processes for                            anti_deuteron
+
+  Process: hadElastic
+        Model: hElasticLHEP             : 0 eV /n ---> 100.1 MeV/n
+        Model: AntiAElastic             : 100 MeV/n ---> 100 TeV/n
+Cr_sctns: AntiAGlauber             : 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: anti_deuteronInelastic
+        Model: FTFP                     : 0 eV /n ---> 100 TeV/n
+Cr_sctns: AntiAGlauber             : 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+  Process: hFritiofCaptureAtRest
+---------------------------------------------------
+Hadronic Processes for                            anti_neutron
+
+  Process: hadElastic
+        Model: hElasticLHEP             : 0 eV  ---> 100 TeV
+Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: anti_neutronInelastic
+        Model: FTFP                     : 0 eV  ---> 100 TeV
+Cr_sctns: AntiAGlauber             : 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+Hadronic Processes for                            anti_proton
+
+  Process: hadElastic
+        Model: hElasticLHEP             : 0 eV  ---> 100.1 MeV
+        Model: AntiAElastic             : 100 MeV ---> 100 TeV
+Cr_sctns: AntiAGlauber             : 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: anti_protonInelastic
+        Model: FTFP                     : 0 eV  ---> 100 TeV
+Cr_sctns: AntiAGlauber             : 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+  Process: hFritiofCaptureAtRest
+---------------------------------------------------
+Hadronic Processes for                            anti_triton
+
+  Process: hadElastic
+        Model: hElasticLHEP             : 0 eV /n ---> 100.1 MeV/n
+        Model: AntiAElastic             : 100 MeV/n ---> 100 TeV/n
+Cr_sctns: AntiAGlauber             : 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: anti_tritonInelastic
+        Model: FTFP                     : 0 eV /n ---> 100 TeV/n
+Cr_sctns: AntiAGlauber             : 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+  Process: hFritiofCaptureAtRest
+---------------------------------------------------
+Hadronic Processes for                            deuteron
+
+  Process: hadElastic
+        Model: hElasticLHEP             : 0 eV /n ---> 100 TeV/n
+Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: dInelastic
+        Model: Binary Light Ion Cascade : 0 eV /n ---> 4 GeV/n
+        Model: FTFP                     : 2 GeV/n ---> 100 TeV/n
+Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+Hadronic Processes for                            kaon+
+
+  Process: hadElastic
+        Model: hElasticLHEP             : 0 eV  ---> 100 TeV
+Cr_sctns: Glauber-Gribov           : 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: kaon+Inelastic
+        Model: FTFB                     : 4 GeV ---> 100 TeV
+        Model: BertiniCascade           : 0 eV  ---> 5 GeV
+Cr_sctns: Glauber-Gribov           : 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: ChipsKaonPlusInelasticXS : 0 eV  ---> 100 TeV
+     Cr_sctns: ChipsKaonPlusInelasticXS : 0 eV  ---> 100 TeV
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+Hadronic Processes for                            kaon-
+
+  Process: hadElastic
+        Model: hElasticLHEP             : 0 eV  ---> 100 TeV
+Cr_sctns: Glauber-Gribov           : 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: kaon-Inelastic
+        Model: FTFB                     : 4 GeV ---> 100 TeV
+        Model: BertiniCascade           : 0 eV  ---> 5 GeV
+Cr_sctns: Glauber-Gribov           : 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: ChipsKaonMinusInelasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns: ChipsKaonMinusInelasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+  Process: hBertiniCaptureAtRest
+---------------------------------------------------
+Hadronic Processes for                            lambda
+
+  Process: hadElastic
+        Model: hElasticLHEP             : 0 eV  ---> 100 TeV
+Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: lambdaInelastic
+        Model: BertiniCascade           : 0 eV  ---> 6 GeV
+        Model: FTFP                     : 2 GeV ---> 100 TeV
+Cr_sctns: ChipsHyperonInelasticXS  : 0 eV  ---> 100 TeV
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+Hadronic Processes for                            mu-
+
+  Process: muMinusCaptureAtRest
+---------------------------------------------------
+Hadronic Processes for                            neutron
+
+  Process: hadElastic
+        Model: hElasticCHIPS            : 0 eV  ---> 100 TeV
+Cr_sctns: G4NeutronElasticXS       : 0 eV  ---> 100 TeV
+     Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: neutronInelastic
+        Model: FTFB                     : 4 GeV ---> 100 TeV
+        Model: Binary Cascade           : 0 eV  ---> 5 GeV
+Cr_sctns: G4NeutronInelasticXS     : 0 eV  ---> 100 TeV
+     Cr_sctns: Barashenkov-Glauber      : 0 eV  ---> 100 TeV
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+  Process: nCapture
+        Model: nRadCapture              : 0 eV  ---> 100 TeV
+Cr_sctns: G4NeutronCaptureXS       : 0 eV  ---> 100 TeV
+     Cr_sctns: GheishaCaptureXS         : 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+Hadronic Processes for                            pi+
+
+  Process: hadElastic
+        Model: hElasticLHEP             : 0 eV  ---> 1.0001 GeV
+        Model: hElasticGlauber          : 1 GeV ---> 100 TeV
+Cr_sctns: Barashenkov-Glauber      : 0 eV  ---> 100 TeV
+     Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: pi+Inelastic
+        Model: FTFB                     : 4 GeV ---> 100 TeV
+        Model: Binary Cascade           : 0 eV  ---> 5 GeV
+Cr_sctns: G4CrossSectionPairGG     : 0 eV  ---> 100 TeV
+                         G4CrossSectionPairGG: G4PiNuclearCrossSection cross sections
+below 91 GeV, Glauber-Gribov above
+Cr_sctns: G4CrossSectionPairGG     : 0 eV  ---> 100 TeV
+                         G4CrossSectionPairGG: G4PiNuclearCrossSection cross sections
+below 91 GeV, Glauber-Gribov above
+Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+Hadronic Processes for                            pi-
+
+  Process: hadElastic
+        Model: hElasticLHEP             : 0 eV  ---> 1.0001 GeV
+        Model: hElasticGlauber          : 1 GeV ---> 100 TeV
+Cr_sctns: Barashenkov-Glauber      : 0 eV  ---> 100 TeV
+     Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: pi-Inelastic
+        Model: FTFB                     : 4 GeV ---> 100 TeV
+        Model: Binary Cascade           : 0 eV  ---> 5 GeV
+Cr_sctns: G4CrossSectionPairGG     : 0 eV  ---> 100 TeV
+                         G4CrossSectionPairGG: G4PiNuclearCrossSection cross sections
+below 91 GeV, Glauber-Gribov above
+Cr_sctns: G4CrossSectionPairGG     : 0 eV  ---> 100 TeV
+                         G4CrossSectionPairGG: G4PiNuclearCrossSection cross sections
+below 91 GeV, Glauber-Gribov above
+Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+  Process: hBertiniCaptureAtRest
+---------------------------------------------------
+Hadronic Processes for                            proton
+
+  Process: hadElastic
+        Model: hElasticCHIPS            : 0 eV  ---> 100 TeV
+Cr_sctns: ChipsProtonElasticXS     : 0 eV  ---> 100 TeV
+     Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: protonInelastic
+        Model: FTFB                     : 4 GeV ---> 100 TeV
+        Model: Binary Cascade           : 0 eV  ---> 5 GeV
+Cr_sctns: Barashenkov-Glauber      : 0 eV  ---> 100 TeV
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+Hadronic Processes for                            triton
+
+  Process: hadElastic
+        Model: hElasticLHEP             : 0 eV /n ---> 100 TeV/n
+Cr_sctns: GheishaElastic           : 0 eV  ---> 100 TeV
+
+  Process: tInelastic
+        Model: Binary Light Ion Cascade : 0 eV /n ---> 4 GeV/n
+        Model: FTFP                     : 2 GeV/n ---> 100 TeV/n
+Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns: GheishaInelastic         : 0 eV  ---> 100 TeV
+
+================================================================
+=======================================================================
+======       Pre-compound/De-excitation Physics Parameters     ========
+=======================================================================
+Type of pre-compound inverse x-section              3
+Pre-compound model active                           1
+Pre-compound low energy (MeV)                       0.1
+Type of de-excitation inverse x-section             3
+Type of de-excitation factory                       Evaporation
+Number of de-excitation channels                    8
+Min excitation energy (keV)                         0.01
+Min energy per nucleon for multifragmentation (MeV) 1e+05
+Level density (1/MeV)                               0.1
+Time limit for long lived isomeres (ns)             1442.7
+Internal e- conversion flag                         1
+Store e- internal conversion data                   1
+Electron internal conversion ID                     0
+Correlated gamma emission flag                      0
+Max 2J for sampling of angular correlations         10
+=======================================================================
+/vis/scene/notifyHandlers scene-0
+Run ID 0
+Using Root
+* MyEventActForHist CollectionID found: 0 for none HitsCollection
+procMQED 0x1afdfc0 procMElastic 0x1ba4530 procMInElastic 0x1bfa660
+G4VisManager: Using G4TrajectoryDrawByCharge as fallback trajectory model.
+See commands in /vis/modeling/trajectories/ for other options.
+%%%%%%%%%%%%%%%%%%%%%%
+Using Root
+Output File:  Sample0.root
+%%%%%%%%%%%%%%%%%%%%%%
+WARNING: 10 events have been kept for refreshing and/or reviewing.
+"/vis/reviewKeptEvents" to review them one by one.
+  "/vis/enable", then "/vis/viewer/flush" or "/vis/viewer/rebuild" to see them accumulated.
+/vis/viewer/set/picking false
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
+/vis/viewer/set/picking true
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
+/vis/viewer/set/picking true
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
+/vis/viewer/set/picking true
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+You may need to issue "/vis/viewer/update".
+/vis/viewer/refresh
