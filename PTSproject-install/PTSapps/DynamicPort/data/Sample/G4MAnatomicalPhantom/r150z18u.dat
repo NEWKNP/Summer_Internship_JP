@@ -1,0 +1,20 @@
+001
+eRadius:150mm(drx = dry) eFullThickness:150mm nInnerR:60mm nOuterR:110mm nRadius:20mm (1:exist, 0:not exist) 
+H_2O	150.	150.	131.25	TUBE
+16
+lungInhale	60.	0.	20.	0
+Muscle		60.	45.	20.	0
+adiposeTissue	60.	90.	20.	0
+Muscle		60.	135.	20.	1
+lungInhale	60.	180.	20.	1
+Liver		60.	225.	20.	1
+adiposeTissue	60.	270.	20.	1
+Liver		60.	315.	20.	0
+lungExhale	110.	0.	20.	0
+Breast		110.	45.	20.	0
+trabecularBone	110.	90.	20.	0
+Breast		110.	135.	20.	1
+lungExhale	110.	180.	20.	1
+denseBone	110.	225.	20.	1
+trabecularBone	110.	270.	20.	1
+denseBone	110.	315.	20.	0

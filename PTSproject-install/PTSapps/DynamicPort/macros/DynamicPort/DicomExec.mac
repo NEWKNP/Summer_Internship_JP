@@ -1,0 +1,173 @@
+#-----------------------------------------------------------------------------
+#
+#
+#-----------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# ----------------------------------------------------------------------------
+# [OP]Verbose settings
+# ----------------------------------------------------------------------------
+/control/verbose 1
+/run/verbose 0
+/tracking/verbose 0
+#
+#=============================================================================
+# [MA]Material
+#=============================================================================
+/control/execute ./macros/common/materials.mac
+#
+#=============================================================================
+# [MA]PhysicsList
+#=============================================================================
+/control/execute ./macros/common/phys.mac
+#
+#=============================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#=============================================================================
+/G4M/System DynamicPort
+/control/execute  ./macros/DynamicPort/beamModule7.mac
+##
+/My/PrimaryGenerator/select BeamGun
+/control/execute ./macros/DynamicPort/InitBeam.mac
+#
+#==============================================================================
+# [OP]Parallel World
+#==============================================================================
+##/My/DetConstruction/createPW  paraWorld0
+##/My/DetConstruction/listPW
+#==============================================================================
+# [OP]Process for Parallel World
+#==============================================================================
+#                <ParallelWorldName:s>  <Layered:b>
+###/My/physics/pwProcess    paraWorld0    true
+#
+#==============================================================================
+# [MA]Run Initialize
+#==============================================================================
+/run/initialize
+#
+#  (Idle State)
+#
+#==============================================================================
+# [MA]Beam Module Implmentation
+#==============================================================================
+/G4M/Module/list
+#
+# Default Beam module positions
+#
+# ======================================
+# Beam Module Selection by DICOM-RTIonX
+# ======================================
+/control/getEnv  DICOMRTPDATA
+/control/getEnv  BEAMID
+/MyDynamic/Module/RTPFile  {DICOMRTPDATA}
+/MyDynamic/DICOM/beamid {BEAMID}
+####/MyDynamic/DICOM/beamid 0
+/MyDynamic/DICOM/printRefBeam
+/control/getEnv  OUTREFDOSE
+/MyDynamic/DICOM/printRefDose {OUTREFDOSE}
+####/MyDynamic/DICOM/printRTPInfo
+/MyDynamic/Module/RTPApply
+/MyDynamic/Module/RTPInstall
+/G4M/Module/list 2
+#
+# ======================================
+# DICOM Target settings and installation
+# ======================================
+#
+/G4M/DICOM/select      DICOM
+/control/getEnv        DICOMDATA
+/G4M/DICOM/file        {DICOMDATA}
+/G4M/DICOM/mesh         4.0000 mm
+####/G4M/DICOM/mesh         10.0000 mm
+/G4M/DICOM/densityResol  0.01
+/G4M/DICOM/minvalue    -1000.
+/G4M/DICOM/maxvalue     2000.
+/G4M/DICOM/ctair       -1000.
+/G4M/DICOM/ctcutoff    -500.
+#####/G4M/DICOM/isocenter  -2.4 -41.8 11.0 mm
+/control/getEnv        DICOMWELDATA
+/G4M/DICOM/ct2density  {DICOMWELDATA}
+/G4M/DICOM/paramtype   data/Sample/Dicom/CT2G4WATER.dat
+/G4M/Module/install DICOM
+###/G4M/Module/install DICOM paraWorld0
+# -----------------------------------------------------------------------------
+# [OP] ROOT Output file Name
+# -----------------------------------------------------------------------------
+/control/getEnv OUTPUTROOT
+/control/getEnv OUTPUTGDD
+/My/runaction/hist/enable DICOMCT false
+/My/runaction/hist/enable DICOM   true
+##/My/runaction/hist/enable JSTEdep true
+/My/runaction/hist/enable JSTDose true
+/My/runaction/ntuple/create JST 
+#/My/runaction/ntuple/addColumn JST evno I
+#/My/runaction/ntuple/addColumn JST trkid I
+#/My/runaction/ntuple/addColumn JST pid I
+/My/runaction/ntuple/addColumn JST de  F  keV
+/My/runaction/ntuple/addColumn JST dose  F  gray
+/My/runaction/ntuple/addColumn JST ix  I 
+/My/runaction/ntuple/addColumn JST iy  I 
+/My/runaction/ntuple/addColumn JST iz  I 
+#/My/runaction/ntuple/addColumn JST w  F
+#/My/runaction/ntuple/addColumn JST proc I
+#/My/runaction/ntuple/addColumn JST ke F MeV
+##
+/My/runaction/dumpfile {OUTPUTROOT}
+##/My/gMocren/file       {OUTPUTGDD}
+#
+#=============================================================================
+# [OP] Visualization Settings
+#=============================================================================
+#/G4M/Module/uninstall WobblerX
+#/G4M/Module/uninstall WobblerY
+#/G4M/Module/uninstall Scatter
+#/G4M/Module/uninstall BCA
+#/G4M/Module/uninstall MainMonitor
+#/G4M/Module/uninstall SubMonitor
+#/G4M/Module/uninstall RidgeFilter
+#/G4M/Module/uninstall FlatMonitor
+#/G4M/Module/uninstall BCB
+#/G4M/Module/uninstall MLC
+#/G4M/Module/uninstall Bolus
+#/G4M/Module/uninstall PTCol
+#/G4M/Module/uninstall DICOM
+#
+#/control/execute ./macros/common/vis.mac
+#/control/execute ./macros/common/visDawn.mac
+#
+/G4M/Module/list 2
+#
+/My/tracking1/killZUpStream 2000. mm
+/My/tracking1/killSecondary true
+#
+#============================================================================
+# [MA] BeamOn
+#============================================================================
+#
+/control/getEnv   EVMONFILE 
+/My/EventActForMonitor/eventMonitor 10000 {EVMONFILE}
+#
+/control/getEnv   BEAMON
+/run/beamOn       {BEAMON}
+#
+/control/getEnv   GRIDDATAOUT
+/G4M/Module/select DICOM
+/G4M/Module/lang 1
+/G4M/Module/dumpToFile {GRIDDATAOUT}
+#
+###/control/getEnv   RTDOSESHOUT
+###/G4M/Module/select DICOM
+###/G4M/Module/lang 10
+###/G4M/Module/dumpToFile {RTDOSESHOUT}
+#
+#
+####/control/getEnv   MLCDATAOUT
+####/G4M/Module/select MLC
+####/G4M/Module/dumpToFile {MLCDATAOUT}
+#
+####/control/getEnv   BOLUSDATAOUT
+####/G4M/Module/select Bolus
+####/G4M/Module/dumpToFile {BOLUSDATAOUT}
+# --EOF---------------------------------------------------------------------

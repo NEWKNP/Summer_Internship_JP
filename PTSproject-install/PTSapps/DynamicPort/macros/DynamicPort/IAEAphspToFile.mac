@@ -1,0 +1,7 @@
+#
+#/control/echo {IAEAFILEID}
+#
+/G4M/IAEAphsp/Writer/file {IAEAFILEID}
+/G4M/IAEAphsp/Writer/addZStop  {IAEA_PHSP_Z} mm
+/G4M/IAEAphsp/Writer/setDirection -1
+#

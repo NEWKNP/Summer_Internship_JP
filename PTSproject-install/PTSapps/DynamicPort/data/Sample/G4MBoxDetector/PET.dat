@@ -1,0 +1,45 @@
+#### Sector
+200.0 200.0 200.0
+G4_Al
+#### Module (Replication) 1.0mmt Al case
+1 1 1
+198.0 198.0 198.0
+G4_AIR
+0.  0.  0.
+0.  0.  0.
+#### Submodule (Replication) DetctorUnit=BGO+PMT
+6 6 1
+26.2  26.2   35.0
+G4_AIR
+-76.5  76.5  +60.00
+30.4   -30.4  0.0
+#### Layer (space for POM cover,  BGO, PMT)
+3
+26.2   26.2  3.0
+G4_AIR
+16.0
+26.2   26.2  22.0
+G4_AIR
+3.5
+26.2   26.2  10.0
+G4_AIR
+-12.5
+##### Tower for Layer 1 ( POM )
+1   1   
+26.2  26.2   3.0
+POM
+0.0   0.0   0.0
+0.0   0.0   
+##### Tower for Layer 2 ( BGO )
+11   11   
+2.2  2.2  22.0
+G4_BGO
+-12.0   12.0   0.0
+2.4     -2.4   
+##### Tower for Layer 3 ( PMT )
+8   8   
+3.275  3.275  10.0
+G4_Al
+-11.4625  11.4625   0.0
+3.275     -3.275    
+

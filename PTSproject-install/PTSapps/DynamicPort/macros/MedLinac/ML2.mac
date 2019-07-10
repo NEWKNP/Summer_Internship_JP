@@ -1,0 +1,106 @@
+#--------------------------------------------------------------------------------------
+#
+# Macro file is for Bragg peak distribution in water.
+# The energies of proton are chosen to be 150 MeV, 190 MeV, and 230 MeV.
+# All processes are included.
+# Though measurements are done using small detector (radius ~ 5mm), this macro
+# uses simple plate of 200. x 200. x 1. mm water. The plates are aligned to z-axis.
+# 
+#       2006 AUG. 30   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+/control/verbose 2
+/run/verbose 2
+/tracking/verbose 0
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/MedLinac/materials.mac
+#
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/MedLinac/phys.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+/control/execute  ./macros/MedLinac/beamModule.mac
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#
+#  (Idle State)
+#
+#======================================================================================
+# [MA]Beam Module Implmentation
+#======================================================================================
+/G4M/Module/list
+# -----------------------------------------
+# Water Phantom settings and installation
+# ----------------------------------------- 
+## Water Phantom Size (Half length)
+/G4M/Module/Phantom/size 50. 50. 50. mm
+## Water Phantom SD Size (Half length) 
+/G4M/Module/Phantom/sdsize 50. 50. 50. mm
+## Segmentation of water phantom ( Nx, Ny, Nz )
+/G4M/Module/Phantom/dim 50. 50. 50.
+/G4M/Module/Phantom/material G4_Galactic
+/G4M/Module/Phantom/edep false
+/G4M/Module/select WaterPhantom
+/G4M/Module/translate 0. 0. 0. mm 
+## Installation of WaterPhantom. 
+/G4M/Module/install WaterPhantom
+#
+# -----------------------------------------
+# Installation of the other modules
+# ----------------------------------------- 
+
+/G4M/Module/install TargetA
+/G4M/Module/install TargetB
+/G4M/Module/install MLC
+/G4M/Module/install BeWindow
+/G4M/Module/install FFL6_1
+/G4M/Module/install Mirror
+/G4M/Module/install UpperCollimator
+/G4M/Module/install LowerCollimator
+/G4M/Module/install FFL1A
+/G4M/Module/install JawX1
+/G4M/Module/install JawX2
+/G4M/Module/install JawY1
+/G4M/Module/install JawY2
+/G4M/Module/install IonizationChamber
+#
+#======================================================================================
+# [MA] Beam Parameters
+#======================================================================================
+/control/execute ./particleGun.mac
+#
+# -------------------------------------------------------------------------------------
+# [OP] ROOT Output file Name
+# -------------------------------------------------------------------------------------
+/My/runaction/dumpfile ML2.root
+#
+#======================================================================================
+# [OP] Visualization Settings
+#======================================================================================
+/control/execute ./macros/common/vis.mac
+#
+#======================================================================================
+# [MA] BeamOn
+#======================================================================================
+#
+###/run/beamOn 1000000
+#
+# --EOF----------------------------------------------------------------------------------

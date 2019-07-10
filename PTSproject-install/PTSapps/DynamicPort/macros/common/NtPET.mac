@@ -1,0 +1,17 @@
+/My/runaction/ntuple/addColumn PET evno I
+/My/runaction/ntuple/addColumn PET trkid I
+/My/runaction/ntuple/addColumn PET pid I
+/My/runaction/ntuple/addColumn PET de  F  keV
+/My/runaction/ntuple/addColumn PET dose  F  gray
+/My/runaction/ntuple/addColumn PET ix  I 
+/My/runaction/ntuple/addColumn PET iy  I 
+/My/runaction/ntuple/addColumn PET iz  I 
+/My/runaction/ntuple/addColumn PET imod  I 
+/My/runaction/ntuple/addColumn PET isec  I 
+/My/runaction/ntuple/addColumn PET x  F 
+/My/runaction/ntuple/addColumn PET y  F 
+/My/runaction/ntuple/addColumn PET z  F 
+###/My/runaction/ntuple/addColumn PET w  F
+/My/runaction/ntuple/addColumn PET proc I
+/My/runaction/ntuple/addColumn PET ke F MeV
+/My/runaction/ntuple/addColumn PET parenttrkid I

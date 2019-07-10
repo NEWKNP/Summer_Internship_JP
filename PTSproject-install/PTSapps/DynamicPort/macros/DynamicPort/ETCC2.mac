@@ -1,0 +1,101 @@
+#--------------------------------------------------------------------------------------
+#
+# ETCC Macro file 
+# All processes are included.
+# 
+#       2016-03   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+/control/verbose 2
+#/run/verbose 2
+#/tracking/verbose 1
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/common/materials.mac
+/G4M/Material/create  TPCGas
+/G4M/Material/create  G4_Si
+/G4M/Material/create  Polymide
+#
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/common/phys.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+/Dynamic/Module/register Room          G4MRoom            ./data/Sample/G4MRoom/room.dat                 0. 0.    0. mm 0. 0. 0. deg
+Dynamic/Module/register ETCC      G4METCC ./data/Sample/G4METCC/etcc.dat  0. 0. 1000. mm 0. 0. 0. deg
+##/Dynamic/Module/register ETCC      G4METCC ./etcc.dat  0. 0. 1000. mm 0. 0. 0. deg
+/Dynamic/Module/register WaterPhantom  G4MWaterPhantom  ./data/Sample/G4MWaterPhantom/waterphantom.dat 0. 0.  -250. mm 0. 180. 0. deg
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#
+#  (Idle State)
+#
+#======================================================================================
+# [MA]Beam Module Implmentation
+#======================================================================================
+/G4M/Module/list
+#
+# -----------------------------------------
+# Installation of the other modules
+# ----------------------------------------- 
+#
+/G4M/Module/install ETCC
+/G4M/Module/select ETCC
+#/G4M/Module/translate 300. 0. 0. mm
+#/G4M/Module/rotate 0. 90. 0. deg
+####/G4M/Module/translate 0. 0. 500. mm
+####/G4M/Module/rotate 0. 0. 0. deg
+#
+##/G4M/Module/cloneIfExist ETCC ETCC2 1 -300 0 0 mm 0 -90 0 deg
+#==============ne========================================================================
+# [MA] Beam Parameters
+#======================================================================================
+/control/execute macros/DynamicPort/particleGun.mac
+/gun/particle gamma
+/gun/energy 0.1 MeV
+#
+# -------------------------------------------------------------------------------------
+# [OP] ROOT Output file Name
+# -------------------------------------------------------------------------------------
+/My/runaction/hist/enable DICOMCT false
+/My/runaction/hist/enable DICOM   false
+/My/runaction/hist/enable JSTEdep false
+/My/runaction/hist/enable JSTDose false
+#
+#
+/My/runaction/dumpfile ETCC_Sample.root
+#
+#======================================================================================
+# [OP] Visualization Settings
+#======================================================================================
+/control/execute ./macros/common/vis3.mac
+#
+#######
+/My/evtaction/digi/create DigiETCCGas DigiETCCGas ETCCGas/HitsCollection  GasDCollection
+/My/evtaction/digi/create DigiETCCCrystal DigiETCCCrystal ETCCCrystal/HitsCollection CrylDCollection
+/My/evtaction/digi/combine DigiETCC DigiETCCOutput GasDCollection CrylDCollection ETCCCollection
+#======================================================================================
+# [MA] BeamOn
+#======================================================================================
+#
+/run/beamOn 0
+#
+#/G4M/Module/select ETCC
+#/G4M/Module/dumpToFile ETCCdump.dat
+# --EOF----------------------------------------------------------------------------------

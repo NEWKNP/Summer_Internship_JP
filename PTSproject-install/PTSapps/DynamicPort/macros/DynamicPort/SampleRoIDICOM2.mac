@@ -1,0 +1,121 @@
+#--------------------------------------------------------------------------------------
+#
+# Macro file is for Bragg peak distribution in water.
+# The energies of proton are chosen to be 150 MeV, 190 MeV, and 230 MeV.
+# All processes are included.
+# Though measurements are done using small detector (radius ~ 5mm), this macro
+# uses simple plate of 200. x 200. x 1. mm water. The plates are aligned to z-axis.
+# 
+#       2006 AUG. 30   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+/control/verbose 2
+/run/verbose 2
+/tracking/verbose 0
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/common/materials.mac
+#
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/common/phys.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+/control/execute  ./macros/DynamicPort/beamModuleROI.mac
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#
+#  (Idle State)
+#
+#======================================================================================
+# [MA]Beam Module Implmentation
+#======================================================================================
+/G4M/Module/list
+#
+# --------------------------------------
+# DICOM Target settings and installation
+# --------------------------------------
+#
+/G4M/DICOM/select      DICOM
+/G4M/DICOM/file        ./DICOM.dat
+/G4M/DICOM/mesh        4.00000 mm
+/G4M/DICOM/densityResol  0.01
+/G4M/DICOM/minvalue    -1000.
+/G4M/DICOM/maxvalue     2000.
+/G4M/DICOM/ctair       -1000.
+/G4M/DICOM/label false
+/G4M/DICOM/ct2density  ./data/Sample/Dicom/CT2Density.dat
+#
+/G4M/DICOM/rts true
+/G4M/DICOM/RTS/file    ./RTS.dat
+/G4M/DICOM/RTS/dump 
+##
+/G4M/DICOM/paramtype   ./data/Sample/Dicom/RoiMat.dat
+#
+#patient         1
+#Water           8
+#Target          9
+#PTVB            10
+#PTV-EyeSimR3cm  11
+/G4M/DICOM/RTS/setROIPriority 1 8 9 10 11
+#
+/G4M/DICOM/isocenter   0. 0. -150. cm
+/G4M/Module/install DICOM
+#
+#
+#======================================================================================
+# [MA] Beam Parameters
+#======================================================================================
+/control/execute macros/DynamicPort/particleGun2.mac
+#
+# -------------------------------------------------------------------------------------
+# [OP] ROOT Output file Name
+# -------------------------------------------------------------------------------------
+/My/runaction/hist/enable DICOMCT true
+/My/runaction/hist/enable DICOM   true
+/My/runaction/hist/enable JST     true
+/My/runaction/hist/enable JSTDose true
+#
+/My/runaction/ntuple/addColumn JST dose  F  gray
+/My/runaction/ntuple/addColumn JST ix  I 
+/My/runaction/ntuple/addColumn JST iy  I 
+/My/runaction/ntuple/addColumn JST iz  I 
+#
+/My/runaction/dumpfile SampleRoIDICOM2.root
+#
+#======================================================================================
+# [OP] Visualization Settings
+#======================================================================================
+#/control/execute ./macros/common/vis.mac
+/My/gMocren/use true
+/My/gMocren/file SampleRoIDICOM2.gdd
+#
+#======================================================================================
+# [MA] BeamOn
+#======================================================================================
+#
+#/run/beamOn 10000
+#
+#
+/G4M/Module/select DICOM
+/G4M/Module/lang  10
+/G4M/Module/dumpToFile  rtdose.sh
+/G4M/Module/lang  1
+/G4M/Module/dumpToFile   grid.dat
+# --EOF----------------------------------------------------------------------------------

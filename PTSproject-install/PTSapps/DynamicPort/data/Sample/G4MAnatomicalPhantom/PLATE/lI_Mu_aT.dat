@@ -1,0 +1,13 @@
+001
+comment
+H_2O	150.	50.	150.	BOX
+3
+lungInhale	100.	0.	25.	1
+Muscle		10	0.	25.	1
+adiposeTissue	100.	180.	25.	1
+
+Liver		50.	0.	25.	1
+lungExhale	50.	180.	25.	1
+trabecularBone	125.	180.	25.	1
+Breast		200.	180.	25.	1
+denseBone	275.	180.	25.	1

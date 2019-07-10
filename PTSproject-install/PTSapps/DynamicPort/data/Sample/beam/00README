@@ -1,0 +1,14 @@
+--------------------------------------------------------------------------------
+Description of Beam parameters
+The file is read by invoking UI command /G4M/Beam/file.
+The parameters are set to G4MBeamGun at G4MBeamGunMessenger.
+--------------------------------------------------------------------------------
+150                    ;  Beam ID       [ not used for setting. ]
+proton 150 MeV         ;  Description   [ not used for setting. ]
+2212                   ;  Particle ID
+150.05  0.00           ;  Beam Energy [MeV],   Beam Energy Spread [MeV]
+0.0     0.0            ;  Angular variance,Spatial covariance [ not used]
+2.16    2.16           ;  Spatial variance in X, and in Y [mm]
+--------------------------------------------------------------------------------
+
+

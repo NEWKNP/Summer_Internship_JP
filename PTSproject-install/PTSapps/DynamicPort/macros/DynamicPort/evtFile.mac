@@ -1,0 +1,6 @@
+/My/PrimaryGenerator/select EvtGun
+/run/initialize
+
+/G4M/EvtIF/open  trackDump.data
+/run/beamOn 1000
+/G4M/EvtIF/close

@@ -1,0 +1,39 @@
+/My/PrimaryGenerator/select   ParticleGun
+/gun/particle    gamma
+/gun/position    0 0 1250. mm
+/gun/direction   0.  0.  -1.
+/gun/energy      6.0 MeV
+###########################################
+#/My/PrimaryGenerator/select   GPS
+#/gps/particle     gamma
+#/gps/pos/type     Point
+#/gps/pos/centre   0 0 1250. mm
+#/gps/ang/type     beam1d
+#/gps/direction    0.  0.  -1.
+#/gps/ene/type     Mono
+#/gps/ene/mono     6.0 MeV
+###########################################
+#/My/PrimaryGenerator/select   GPS
+#/gps/particle     gamma
+#/gps/pos/type     Beam
+#/gps/pos/centre   0.  0.  1250.  mm
+#/gps/pos/sigma_r  5. mm
+#/gps/ang/type     beam2d
+#/gps/ang/sigma_x  0.03  rad
+#/gps/ang/sigma_y  0.03  rad
+#/gps/ene/type     Gauss
+#/gps/ene/mono     6.0 MeV
+#/gps/ene/sigma    0.127 MeV
+###########################################
+#/My/PrimaryGenerator/select   GPS
+#/gps/particle     e-
+#/gps/pos/type     Beam
+#/gps/pos/centre   0.  0.  1250.  mm
+#/gps/pos/sigma_r  5. mm
+#/gps/ang/type     beam2d
+#/gps/ang/sigma_x  0.003  rad
+#/gps/ang/sigma_y  0.003  rad
+#/gps/ene/type     Gauss
+#/gps/ene/mono     6.0 MeV
+#/gps/ene/sigma    0.127 MeV
+###########################################

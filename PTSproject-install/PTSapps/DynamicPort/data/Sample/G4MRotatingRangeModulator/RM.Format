@@ -1,0 +1,27 @@
+RM1
+# Rotating Range Modulator for KNCC
+Air 70. 163. 156.4	//material innerRadius outerRadius thickness(full) (...envelope)
+1	 		//parts
+-68.8 		-1	//1p: offset and direction 
+2 			//1p: tracks
+70.	100.	 	//1p1t: iR oR
+5. 			//1p1t: offsetPhi
+7 			//1p1t: segments
+Lexan	100.00	77.717	//1p1t1s: material, angle and thickness(full)
+Lexan	50.00	82.501
+Lexan	30.00	87.268
+Lexan	10.00	92.017
+Lexan	5.00	96.017
+Lexan	1.00	101.455
+Lexan	1.00	0.
+100. 130.		//1p2t: iR oR
+33.			//1p2t: offsetPhi
+8			//1p2t: segments
+Lexan	120.00	40.00
+Lexan	80.00   50.0
+Lexan	30.00	60.0
+Lexan	20.00	65.0
+Lexan	10.00	70.0
+Lexan	10.00	80.0
+Lexan	15.00   90.0
+Lexan	5.00	95.0

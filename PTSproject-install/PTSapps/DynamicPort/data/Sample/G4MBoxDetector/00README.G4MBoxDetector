@@ -1,0 +1,35 @@
+## Sector
+Dx Dy Dz
+material
+## Module (Replication)
+Nx Ny Nz
+Dx Dy Dz
+material
+xoffset yoffset zoffset
+xpitch  ypitch  zpitch
+## Submodule (Replication)
+Nx Ny Nz
+Dx Dy Dz
+material
+xoffset yoffset zoffset
+xpitch  ypitch  zpitch
+## layer
+Nz
+Dx Dy Dz
+material
+zoffset
+... Continue for Nz set.
+....
+## Tower for Layer 1
+Nx Ny Nz
+Dx Dy Dz
+material
+xoffset yoffset zoffset
+xpitch  ypitch  zpitch
+... Continue for Nz set.
+
+
+
+
+
+

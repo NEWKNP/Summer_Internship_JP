@@ -1,0 +1,7 @@
+# 00README for G4MBoxStructure
+#
+N    <= Number of structures
+Mat1  DX1  DY1  DZ1  Z1   <= Mother(Envelope)'s  material, full size[mm], z-position
+Mat2  DX2  DY2  DZ2  Z2   <= Substructure's material, full size[mm], z-position in the mother volume (i.e. Mat1's volume)
+Mat3  DX3  DY3  DZ3  Z3   <= Substructure's material, full size[mm], z-position in the mother volume (i.e. Mat2's volume)
+...

@@ -1,0 +1,104 @@
+#--------------------------------------------------------------------------------------
+#
+# P1_Sample Macro file 
+# All processes are included.
+# 
+#       2013-10   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+/control/verbose 2
+/run/verbose 2
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/common/materials.mac
+#
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/common/phys.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+/control/execute  ./macros/DynamicPort/beamModule.mac
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#
+#  (Idle State)
+#
+#======================================================================================
+# [MA]Beam Module Implmentation
+#======================================================================================
+/G4M/Module/list
+# -----------------------------------------
+# Water Phantom settings and installation
+# ----------------------------------------- 
+## Water Phantom Size (Half length)
+/G4M/Module/Phantom/size 150. 150. 250.0 mm
+## Water Phantom SD Size (Half length) 
+/G4M/Module/Phantom/sdsize 150.0 150.0 250.0 mm
+## Segmentation of water phantom ( Nx, Ny, Nz )
+/G4M/Module/Phantom/dim 300. 300. 500.
+## Installation of WaterPhantom. 
+/G4M/Module/install WaterPhantom
+/G4M/Module/select WaterPhantom
+/G4M/Module/upEdgeZ 0.  mm
+#
+# -----------------------------------------
+# Installation of the other modules
+# ----------------------------------------- 
+/G4M/Module/install Extract
+/G4M/Module/install WobblerX
+/G4M/Module/install WobblerY
+/G4M/Module/install MainMonitor
+/G4M/Module/install SecondMonitor
+/G4M/Module/install FlatMonitor
+/G4M/Module/install Collimator
+#
+#/G4M/Module/install Scatter
+#/G4M/Module/install RidgeFilter
+#
+#======================================================================================
+# [OP] Modifying beam device parameters
+#======================================================================================
+#/G4M/Module/select WobblerX
+#/G4M/Module/typeid ./data/Sample/G4MWobblerMagnet/wobblerX.dat
+#/G4M/Module/select WobblerY
+#/G4M/Module/typeid ./data/Sample/G4MWobblerMagnet/wobblerY.dat
+#
+#======================================================================================
+# [MA] Beam Parameters
+#======================================================================================
+/control/execute ./P2_beam.mac
+#
+# -------------------------------------------------------------------------------------
+# [OP] ROOT Output file Name
+# -------------------------------------------------------------------------------------
+/control/execute  ./macros/common/Hist2.mac
+/My/runaction/dumpfile P2_Sample.root
+#
+#======================================================================================
+# [OP] Visualization Settings
+#======================================================================================
+#/control/execute ./macros/common/vis3.mac
+#
+#======================================================================================
+# [MA] BeamOn
+#======================================================================================
+#
+/run/beamOn 0
+#
+# --EOF----------------------------------------------------------------------------------

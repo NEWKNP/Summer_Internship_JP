@@ -1,0 +1,69 @@
+#--------------------------------------------------------------------------------------
+#
+# Macro file is for Bragg peak distribution in water.
+# The energies of proton are chosen to be 150 MeV, 190 MeV, and 230 MeV.
+# All processes are included.
+# Though measurements are done using small detector (radius ~ 5mm), this macro
+# uses simple plate of 200. x 200. x 1. mm water. The plates are aligned to z-axis.
+# 
+#       2006 AUG. 30   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+#/control/verbose 2
+#/run/verbose 2
+#/tracking/verbose 1
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/MedLinac/materials.mac
+#
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/MedLinac/phys.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+/control/execute  ./ML2_6beamModule.mac
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#======================================================================================
+# [MA]Beam Module Implmentation
+#======================================================================================
+/G4M/Module/list
+#
+#
+#======================================================================================
+# [OP] Particle Generator
+#======================================================================================
+#
+/control/execute  ./macros/MedLinac/Hist_6.mac
+#
+/My/runaction/dumpfile  OutML2_6
+#
+#
+#/G4M/Module/install DICOM
+#
+/control/execute ./macros/common/vis.mac
+#
+/My/PrimaryGenerator/select   GPS
+/gps/particle gamma
+/gps/pos/type   Beam
+/gps/pos/centre   0 0  100. mm
+#
+####/run/beamOn 1000000
+#
+# --EOF----------------------------------------------------------------------------------

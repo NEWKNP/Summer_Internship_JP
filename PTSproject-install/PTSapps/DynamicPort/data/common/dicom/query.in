@@ -1,0 +1,10 @@
+# query patient names and IDs
+(0008,0052) CS [STUDY]     # QueryRetrieveLevel
+(0010,0010) PN []            # PatientsName
+(0010,0020) LO []            # PatientID
+(0020,0010) SH []            # StudyID
+(0008,0020) DA []            # StudyDate
+(0008,0050) SH []            # AccessionNumber
+(0008,0061) CS []            # ModalitiesInStudy
+(0010,0040) CS []            # Sex
+(0020,000D) UI []	     # StudyInstanceUID

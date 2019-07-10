@@ -1,0 +1,8 @@
+#======================================================================================
+# [MA] Beam Parameters for ParticleGun
+#======================================================================================
+/gun/particle proton
+/gun/energy 150.04 MeV
+/gun/position 0 0 3231.55 mm
+/gun/direction 0 0 -1
+/G4M/Beam/gaussSpot  true

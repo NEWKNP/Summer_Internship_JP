@@ -1,0 +1,86 @@
+#--------------------------------------------------------------------------------------
+#
+# Macro file is for Bragg peak distribution in water.
+# The energies of proton are chosen to be 150 MeV, 190 MeV, and 230 MeV.
+# All processes are included.
+# Though measurements are done using small detector (radius ~ 5mm), this macro
+# uses simple plate of 200. x 200. x 1. mm water. The plates are aligned to z-axis.
+# 
+#       2006 AUG. 30   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+#/control/verbose 2
+#/run/verbose 2
+#/tracking/verbose 1
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/MedLinac/materials.mac
+#
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/MedLinac/phys.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+/control/execute  ./macros/MedLinac/beamModule.mac
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#======================================================================================
+# [MA]Beam Module Implmentation
+#======================================================================================
+/G4M/Module/list
+# --------------------------------------
+# DICOM Target settings and installation
+# --------------------------------------
+/G4M/DICOM/file        ./DICOM.dat
+/G4M/DICOM/ct2density  ./data/Sample/Dicom/CT2Density.dat
+/G4M/DICOM/paramtype   ./data/Sample/Dicom/CT2G4WATER.dat
+/G4M/DICOM/mesh         2.00 mm
+/G4M/DICOM/densityResol  0.01
+/G4M/DICOM/minvalue    -1000.
+/G4M/DICOM/maxvalue     2000.
+/G4M/DICOM/ctair       -1000.
+/G4M/DICOM/ctcutoff    -500.
+/G4M/DICOM/gantry      0. deg
+/G4M/DICOM/isocenter   0. 0. -150. cm
+/G4M/Module/install DICOM
+#
+#======================================================================================
+# [OP] Particle Generator
+#======================================================================================
+/control/execute  ./macros/MedLinac/gpsP.mac
+#
+/control/execute  ./macros/MedLinac/Hist_0.mac
+/control/execute  ./macros/MedLinac/NtJST_0.mac
+#
+/My/runaction/dumpfile  OutML4_1
+#
+###/control/execute ./macros/common/vis.mac
+###/My/gMocren/use true
+#
+/run/beamOn 50000
+#
+#======================================================================================
+# [OP] Dump the grid information of DICOM geometry
+#======================================================================================
+/G4M/Module/select DICOM
+/G4M/Module/lang  10
+/G4M/Module/dumpToFile   rtdose.sh
+/G4M/Module/lang  1
+/G4M/Module/dumpToFile   grid.dat
+# --EOF----------------------------------------------------------------------------------

@@ -1,0 +1,9 @@
+/My/PrimaryGenerator/select BeamGun
+/gun/position 0. 0. 1 m
+/gun/direction 0 0 -1
+/gun/particle  proton
+###/gun/particle  gamma
+###/gun/energy   3 MeV
+/gun/energy   130 MeV
+/G4M/Beam/spotsize  10. 10. 0. mm
+/G4M/Beam/gaussSpot  true

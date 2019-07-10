@@ -1,0 +1,47 @@
+#--------------------------------------------------------------------------------------
+#
+# Macro file is for Bragg peak distribution in water.
+# The energies of proton are chosen to be 150 MeV, 190 MeV, and 230 MeV.
+# All processes are included.
+# Though measurements are done using small detector (radius ~ 5mm), this macro
+# uses simple plate of 200. x 200. x 1. mm water. The plates are aligned to z-axis.
+# 
+#       2006 AUG. 30   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+/control/verbose 2
+/run/verbose 2
+/tracking/verbose 0
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/common/materials.mac
+#
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/common/phys.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+/control/execute  ./macros/DynamicPort/beamModule.mac
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#
+#  (Idle State)
+#
+#======================================================================================
+/control/execute  ./macros/common/vis.mac

@@ -1,0 +1,74 @@
+####
+# Material defined by elements.
+###
+# Path for data files of materials and elements
+/G4M/Element/path   ./data/common/element
+/G4M/Material/path  ./data/common/material
+###
+# If the useG4Element is set to TRUE, elements are taken from NIST database.
+###
+/G4M/Element/useG4Element TRUE
+#/G4M/Element/useG4Element FALSE
+###
+# Create Materials from data files.
+##
+/G4M/Material/create  Hydrogen
+/G4M/Material/create  Aluminium
+/G4M/Material/create  Argon
+/G4M/Material/create  Chlorine
+/G4M/Material/create  Copper
+/G4M/Material/create  Gold
+/G4M/Material/create  Iron
+/G4M/Material/create  Nickel
+/G4M/Material/create  Nitrogen
+/G4M/Material/create  Oxygen
+/G4M/Material/create  Silicon
+/G4M/Material/create  Titanium
+/G4M/Material/create  lead
+/G4M/Material/create  concrete
+/G4M/Material/create  Tantalum
+/G4M/Material/create  Tungsten
+/G4M/Material/create  Lexan
+/G4M/Material/create  Carbon
+#
+/G4M/Material/create  Acetate
+/G4M/Material/create  Acrylic
+/G4M/Material/create  Air
+/G4M/Material/create  Brass
+/G4M/Material/create  Epoxy
+/G4M/Material/create  FR-4_Glass_Epoxy
+/G4M/Material/create  Gelatin
+/G4M/Material/create  H_2O
+/G4M/Material/create  KAVLAR
+/G4M/Material/create  Kapton
+/G4M/Material/create  Mylar
+/G4M/Material/create  PETP
+/G4M/Material/create  Polyethylene
+/G4M/Material/create  Scintillator
+/G4M/Material/create  SiO2
+#
+/G4M/Material/create  Liver
+/G4M/Material/create  Muscle
+/G4M/Material/create  Phantom
+/G4M/Material/create  SkeletonRibs
+/G4M/Material/create  SkeletonSpongiosa
+/G4M/Material/create  adiposeTissue
+/G4M/Material/create  Breast
+/G4M/Material/create  lungExhale
+/G4M/Material/create  lungInhale
+/G4M/Material/create  trabecularBone
+/G4M/Material/create  denseBone
+####
+# Material Defined by other materials
+####
+/G4M/Material/create  G10
+/G4M/Material/create  Vacuum
+####
+#  NIST materials are also usable
+###
+/G4M/Material/create G4_WATER 
+/G4M/Material/create G4_POLYETHYLENE
+/G4M/Material/create G4_AIR
+/G4M/Material/create G4_Fe
+#/G4M/Material/create G4_PLEXIGLASS
+#

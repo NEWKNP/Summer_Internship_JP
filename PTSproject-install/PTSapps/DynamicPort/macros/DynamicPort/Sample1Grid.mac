@@ -1,0 +1,153 @@
+#--------------------------------------------------------------------------------------
+#
+# Macro file is for Bragg peak distribution in water.
+# The energies of proton are chosen to be 150 MeV, 190 MeV, and 230 MeV.
+# All processes are included.
+# Though measurements are done using small detector (radius ~ 5mm), this macro
+# uses simple plate of 200. x 200. x 1. mm water. The plates are aligned to z-axis.
+# 
+#       2006 AUG. 30   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+/control/verbose 2
+/run/verbose 2
+/tracking/verbose 0
+#
+#======================================================================================
+# Get and Rename Grid specific IDs to make this macro independent from Grid systems.
+# -------------------------------------------------------------------------------------
+/control/getEnv  MY_JOB_ID
+/control/getEnv  MY_TASK_ID
+#======================================================================================
+#
+/control/multiply SEED0 {MY_TASK_ID} {MY_JOB_ID}
+/control/add      SEED1 {MY_TASK_ID} {MY_JOB_ID}
+/control/add      SEED2 {SEED0} {MY_JOB_ID}
+/random/setSeeds  {SEED0}  {SEED1} {SEED2}
+#
+#####
+#/random/setDirectoryName random/{MY_TASK_ID}
+#/random/setSavingFlag true
+####/random/resetEngineFrom random/{MY_TASK_ID}/ErrorEvent.rndm
+# -------------------------------------------------------------------------------------
+# FACILITY SPECITIC PARAMETERS
+# -------------------------------------------------------------------------------------
+/control/alias    OUTPUTROOTID   hist.root_{MY_TASK_ID}
+/control/getEnv NBEAM
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/common/materials.mac
+#
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/common/phys.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+/control/execute  ./macros/DynamicPort/beamModule.mac
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#
+#  (Idle State)
+#
+#======================================================================================
+# [MA]Beam Module Implmentation
+#======================================================================================
+/G4M/Module/list
+# -----------------------------------------
+# Water Phantom settings and installation
+# ----------------------------------------- 
+## Water Phantom Size (Half length)
+/G4M/Module/Phantom/size 150. 150. 250.0 mm
+## Water Phantom SD Size (Half length) 
+/G4M/Module/Phantom/sdsize 150.0 150.0 250.0 mm
+## Segmentation of water phantom ( Nx, Ny, Nz )
+/G4M/Module/Phantom/dim 300. 300. 500.
+## Installation of WaterPhantom. 
+/G4M/Module/install WaterPhantom
+#
+# -----------------------------------------
+# Installation of the other modules
+# ----------------------------------------- 
+#/G4M/Module/install Extract
+#/G4M/Module/install Scatter
+#/G4M/Module/install WobblerX
+#/G4M/Module/install WobblerY
+#/G4M/Module/install MainMonitor
+#/G4M/Module/install SECMonitor
+#/G4M/Module/install FlatMonitor
+#/G4M/Module/install Collimator
+#/G4M/Module/install MLC
+#
+# -------------------------------------------------------------------------------------
+# [OP] Change Beam Module Parameters
+# -------------------------------------------------------------------------------------
+#/G4M/Module/select WaterPhantom
+#/G4M/Module/translate 0. 0. -107.5 mm
+#/G4M/Module/select Scatter
+#/G4M/Module/typeid ./data/Sample/G4MDisk/016.dat
+#
+#======================================================================================
+# [MA] Beam Parameters
+#======================================================================================
+/control/execute macros/DynamicPort/particleGun.mac
+#
+#======================================================================================
+# [OP] Optional settings
+#======================================================================================
+# -------------------------------------------------------------------------------------
+# [OP] Production Cuts, Region Production Cuts, for WaterPhantom or DICOM.
+# -------------------------------------------------------------------------------------
+# This setting must be done after installation of Module.
+#/run/setCut 1. mm
+#/run/setCutForRegion WaterPhantom  30. micrometer
+#/run/setCutForRegion WaterPhantom  15. micrometer
+#/My/physics/stepLimitForRegion WaterPhantom 10. micrometer
+#
+# -------------------------------------------------------------------------------------
+# [OP] Secondary Track Suppression
+# -------------------------------------------------------------------------------------
+#/My/tracking1/killZUpStream 1000. mm
+#/My/tracking1/killNeutral true
+#/My/tracking1/killLepton true
+#/My/tracking1/killSecondary true
+#/My/tracking2/killZUpStream -1000. mm
+#/My/tracking2/killNeutral true
+#
+# -------------------------------------------------------------------------------------
+# [OP] Initial Random Seed
+# -------------------------------------------------------------------------------------
+#/random/resetEngineFrom ./LastSeed.info
+#
+# -------------------------------------------------------------------------------------
+# [OP] ROOT Output file Name
+# -------------------------------------------------------------------------------------
+/My/runaction/dumpfile  {OUTPUTROOTID}
+#
+#======================================================================================
+# [OP] Visualization Settings
+#======================================================================================
+#/control/execute ./macros/common/vis.mac
+#
+#======================================================================================
+# [MA] BeamOn
+#======================================================================================
+#
+/run/beamOn {NBEAM}
+#
+# --EOF----------------------------------------------------------------------------------

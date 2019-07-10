@@ -1,0 +1,141 @@
+#--------------------------------------------------------------------------------------
+#
+# PET Macro file 
+# All processes are included.
+# 
+#       2016-03   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+/control/verbose 2
+#/run/verbose 2
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/common/materials.mac
+#
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/common/phys.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+/control/execute  ./macros/DynamicPort/beamModuleMULTIDet.mac
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#
+#  (Idle State)
+#
+#======================================================================================
+# [MA]Beam Module Implmentation
+#======================================================================================
+/G4M/Module/list
+# -----------------------------------------
+# Water Phantom settings and installation
+# ----------------------------------------- 
+## Water Phantom Size (Half length)
+/G4M/Module/Phantom/size 150. 150. 250.0 mm
+## Water Phantom SD Size (Half length) 
+/G4M/Module/Phantom/sdsize 150.0 150.0 250.0 mm
+## Segmentation of water phantom ( Nx, Ny, Nz )
+/G4M/Module/Phantom/dim 1. 1. 1.
+## Installation of WaterPhantom. 
+/G4M/Module/select WaterPhantom
+/G4M/Module/translate 0. 0. 0. mm
+/G4M/Module/install WaterPhantom
+#
+# -----------------------------------------
+# Installation of the other modules
+# ----------------------------------------- 
+#
+/G4M/Module/install BoxDetector
+#
+/G4M/Module/cloneIfExist BoxDetector BoxDetector2  1  0. 0. 300. mm 0 0 0 deg
+###
+/G4M/Module/install TubeDetector
+#
+####
+#======================================================================================
+# [MA] Beam Parameters
+#======================================================================================
+/control/execute macros/DynamicPort/particleGun.mac
+#
+# -------------------------------------------------------------------------------------
+# [OP] ROOT Output file Name
+# -------------------------------------------------------------------------------------
+#####
+/My/runaction/ntuple/create JST WaterPhantom/HitsCollection
+/My/runaction/ntuple/addColumn JST evno I
+##/My/runaction/ntuple/addColumn JST trkid I
+/My/runaction/ntuple/addColumn JST pid I
+#/My/runaction/ntuple/addColumn JST de  F  keV
+#/My/runaction/ntuple/addColumn JST dose  F  gray
+#/My/runaction/ntuple/addColumn JST ix  I 
+#/My/runaction/ntuple/addColumn JST iy  I 
+#/My/runaction/ntuple/addColumn JST iz  I 
+/My/runaction/ntuple/addColumn JST x  F mm 
+/My/runaction/ntuple/addColumn JST y  F mm
+/My/runaction/ntuple/addColumn JST z  F mm
+#/My/runaction/ntuple/addColumn JST w  F
+#/My/runaction/ntuple/addColumn JST proc I
+#/My/runaction/ntuple/addColumn JST ke F MeV
+#######
+#####
+/My/runaction/ntuple/create  BOXD  BoxDetector/HitsCollection
+/My/runaction/ntuple/addColumn BOXD evno I
+##/My/runaction/ntuple/addColumn BOXD trkid I
+/My/runaction/ntuple/addColumn BOXD pid I
+#/My/runaction/ntuple/addColumn BOXD de  F  keV
+#/My/runaction/ntuple/addColumn BOXD dose  F  gray
+/My/runaction/ntuple/addColumn BOXD imod  I 
+#/My/runaction/ntuple/addColumn BOXD ix  I 
+#/My/runaction/ntuple/addColumn BOXD iy  I 
+#/My/runaction/ntuple/addColumn BOXD iz  I 
+/My/runaction/ntuple/addColumn BOXD x  F mm 
+/My/runaction/ntuple/addColumn BOXD y  F mm
+/My/runaction/ntuple/addColumn BOXD z  F mm
+#/My/runaction/ntuple/addColumn BOXD w  F
+#/My/runaction/ntuple/addColumn BOXD proc I
+#/My/runaction/ntuple/addColumn BOXD ke F MeV
+#####
+/My/runaction/ntuple/create  TUBD  TubeDetector/HitsCollection
+/My/runaction/ntuple/addColumn TUBD evno I
+##/My/runaction/ntuple/addColumn TUBD trkid I
+/My/runaction/ntuple/addColumn TUBD pid I
+#/My/runaction/ntuple/addColumn TUBD de  F  keV
+#/My/runaction/ntuple/addColumn TUBD dose  F  gray
+#/My/runaction/ntuple/addColumn TUBD ix  I 
+#/My/runaction/ntuple/addColumn TUBD iy  I 
+#/My/runaction/ntuple/addColumn TUBD iz  I 
+/My/runaction/ntuple/addColumn TUBD x  F mm 
+/My/runaction/ntuple/addColumn TUBD y  F mm
+/My/runaction/ntuple/addColumn TUBD z  F mm
+#/My/runaction/ntuple/addColumn TUBD w  F
+#/My/runaction/ntuple/addColumn TUBD proc I
+#/My/runaction/ntuple/addColumn TUBD ke F MeV
+#######
+/My/runaction/dumpfile SampleMULTIDet.root
+#======================================================================================
+# [OP] Visualization Settings
+#======================================================================================
+/control/execute ./macros/common/visext.mac
+#======================================================================================
+# [MA] BeamOn
+#======================================================================================
+#
+/run/beamOn 0
+#
+# --EOF----------------------------------------------------------------------------------

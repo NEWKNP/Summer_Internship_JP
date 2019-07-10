@@ -1,0 +1,18 @@
+###########################################
+/My/PrimaryGenerator/select   GPS
+/gps/particle e-
+/gps/pos/type   Beam
+##/gps/pos/centre   0 0  1250. mm
+/gps/pos/centre   0 0  1005. mm
+##/gps/pos/sigma_r   10.  mm
+/gps/pos/sigma_r   0.  mm
+/gps/ang/type   beam2d
+##/gps/ang/sigma_x   0.003 rad
+##/gps/ang/sigma_y   0.003 rad
+/gps/ang/sigma_x   0.000 rad
+/gps/ang/sigma_y   0.000 rad
+/gps/ene/type      Gauss
+##/gps/ene/mono      6.0 MeV
+/gps/ene/mono      20.0 MeV
+/gps/ene/sigma     0.127 MeV
+###########################################

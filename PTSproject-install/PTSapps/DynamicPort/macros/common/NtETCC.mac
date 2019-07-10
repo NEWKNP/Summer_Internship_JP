@@ -1,0 +1,17 @@
+/My/runaction/ntuple/addColumn ETCC evno I
+/My/runaction/ntuple/addColumn ETCC trkid I
+/My/runaction/ntuple/addColumn ETCC pid I
+/My/runaction/ntuple/addColumn ETCC de  F  keV
+/My/runaction/ntuple/addColumn ETCC dose  F  gray
+/My/runaction/ntuple/addColumn ETCC ix  I 
+/My/runaction/ntuple/addColumn ETCC iy  I 
+/My/runaction/ntuple/addColumn ETCC iz  I 
+/My/runaction/ntuple/addColumn ETCC imod  I 
+/My/runaction/ntuple/addColumn ETCC isec  I 
+/My/runaction/ntuple/addColumn ETCC x  F 
+/My/runaction/ntuple/addColumn ETCC y  F 
+/My/runaction/ntuple/addColumn ETCC z  F 
+###/My/runaction/ntuple/addColumn ETCC w  F
+/My/runaction/ntuple/addColumn ETCC proc I
+/My/runaction/ntuple/addColumn ETCC ke F MeV
+/My/runaction/ntuple/addColumn ETCC parenttrkid I

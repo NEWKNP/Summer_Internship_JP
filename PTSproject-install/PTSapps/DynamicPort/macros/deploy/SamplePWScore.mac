@@ -1,0 +1,90 @@
+#--------------------------------------------------------------------------------------
+#
+# Example Macro file for demonstrating DICOM geometry in Parallel World
+#
+#  The scatter made of lead is moved to isocenter in the Mass geometry, while
+# the DICOM geometry install in a paralell world geometry. 
+#  A paralle world process and a parallel scoring process are attached to the parallel 
+# world.
+#
+#
+#       2013 Mar. 26   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+/control/verbose 2
+/run/verbose 2
+/tracking/verbose 0
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/common/materials.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+/control/execute  ./macros/DynamicPort/beamModule.mac
+#
+#======================================================================================
+# [OP]Parallel World
+#======================================================================================
+/My/DetConstruction/createPW  paraWorld0
+/My/DetConstruction/listPW
+#                        <ParallelWorldName:s> <Layered:b> 
+/My/physics/pwProcess     paraWorld0   false
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/common/phys.mac
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#
+#  (Idle State)
+#
+#======================================================================================
+# [MA]Beam Module Implmentation
+#======================================================================================
+/G4M/Module/list
+#
+# -----------------------------------------
+# Installation of the other modules
+# ----------------------------------------- 
+/G4M/Module/Phantom/size   500. 500. 3550.0 mm
+/G4M/Module/Phantom/sdsize 500. 500. 3550.0 mm
+/G4M/Module/Phantom/dim    100.   1.  710.
+/G4M/Module/select WaterPhantom
+/G4M/Module/translate 0  0   0 mm
+/G4M/Module/install WaterPhantom paraWorld0
+#
+/My/runaction/hist/enable JST     true
+/My/runaction/ntuple/addColumn JST de  F  keV
+/My/runaction/ntuple/addColumn JST ix  I 
+/My/runaction/ntuple/addColumn JST iy  I 
+/My/runaction/ntuple/addColumn JST iz  I 
+#======================================================================================
+# [MA] Beam Parameters
+#======================================================================================
+/control/execute macros/DynamicPort/particleGun2.mac
+#
+#
+# -------------------------------------------------------------------------------------
+# [OP] ROOT Output file Name
+# -------------------------------------------------------------------------------------
+/My/runaction/dumpfile SamplePWScore.root
+#
+/control/execute ./macros/common/vis.mac
+#
+/run/beamOn 100
+#
+# --EOF----------------------------------------------------------------------------------

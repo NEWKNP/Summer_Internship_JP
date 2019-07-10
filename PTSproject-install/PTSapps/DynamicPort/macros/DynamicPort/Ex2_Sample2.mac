@@ -1,0 +1,136 @@
+#--------------------------------------------------------------------------------------
+#
+# Macro file is for Bragg peak distribution in water.
+# The energies of proton are chosen to be 150 MeV, 190 MeV, and 230 MeV.
+# All processes are included.
+# Though measurements are done using small detector (radius ~ 5mm), this macro
+# uses simple plate of 200. x 200. x 1. mm water. The plates are aligned to z-axis.
+# 
+#       2006 AUG. 30   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+/control/verbose 2
+/run/verbose 2
+/tracking/verbose 0
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/common/materials.mac
+#
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/common/phys.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+/control/execute  ./macros/DynamicPort/beamModule.mac
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#
+#  (Idle State)
+#
+#======================================================================================
+# [MA]Beam Module Implmentation
+#======================================================================================
+/G4M/Module/list
+#
+# --------------------------------------
+# DICOM Target settings and installation
+# --------------------------------------
+#
+/G4M/DICOM/select      DICOM
+/G4M/DICOM/file        ./data/Sample/Dicom/DICOM.dat
+/G4M/DICOM/mesh         5.00 mm
+/G4M/DICOM/winXmin     -50.0 mm
+/G4M/DICOM/winXmax     +50.0 mm
+/G4M/DICOM/winYmin     -50.0  mm
+/G4M/DICOM/winYmax     +50.0 mm
+#/G4M/DICOM/winZmin       0.0  mm
+#/G4M/DICOM/winZmax     +50.0 mm
+/G4M/DICOM/trim        true
+/G4M/DICOM/densityResol  0.01
+/G4M/DICOM/minvalue    -1000.
+/G4M/DICOM/maxvalue     2000.
+/G4M/DICOM/ctair       -1000.
+/G4M/DICOM/ctcutoff    -500.
+/G4M/DICOM/ct2density  ./data/Sample/Dicom/CT2Density.dat
+/G4M/DICOM/paramtype   ./data/Sample/Dicom/CT2G4WATER.dat
+/G4M/DICOM/isocenter 0. 0.  10. mm
+/G4M/DICOM/gantry  45. deg
+/G4M/Module/install DICOM
+#
+#
+# -----------------------------------------
+# Installation of the other modules
+# ----------------------------------------- 
+/G4M/Module/install Extract
+/G4M/Module/install Scatter
+/G4M/Module/install WobblerX
+/G4M/Module/install WobblerY
+/G4M/Module/install MainMonitor
+/G4M/Module/install Collimator
+#
+#======================================================================================
+# [MA] Beam Parameters
+#======================================================================================
+/control/execute macros/DynamicPort/particleGun.mac
+#
+#======================================================================================
+# [OP] Optional settings
+#======================================================================================
+# -------------------------------------------------------------------------------------
+# [OP] Production Cuts, Region Production Cuts, for WaterPhantom or DICOM.
+# -------------------------------------------------------------------------------------
+# This setting must be done after installation of Module.
+#/run/setCut 1. mm
+#/run/setCutForRegion WaterPhantom  30. micrometer
+#/run/setCutForRegion WaterPhantom  15. micrometer
+#/My/physics/stepLimitForRegion WaterPhantom 10. micrometer
+#
+# -------------------------------------------------------------------------------------
+# [OP] Secondary Track Suppression
+# -------------------------------------------------------------------------------------
+#/My/tracking1/killZUpStream 1000. mm
+#/My/tracking1/killNeutral true
+#/My/tracking1/killLepton true
+#/My/tracking1/killSecondary true
+#/My/tracking2/killZUpStream -1000. mm
+#/My/tracking2/killNeutral true
+#
+# -------------------------------------------------------------------------------------
+# [OP] Initial Random Seed
+# -------------------------------------------------------------------------------------
+#/random/resetEngineFrom ./LastSeed.info
+#
+# -------------------------------------------------------------------------------------
+# [OP] ROOT Output file Name
+# -------------------------------------------------------------------------------------
+#/My/runaction/dumpfile validation/Sample/Sample2.root
+/My/runaction/dumpfile  Sample2.root
+#
+#======================================================================================
+# [OP] Visualization Settings
+#======================================================================================
+#/control/execute ./macros/common/vis.mac
+#
+#======================================================================================
+# [MA] BeamOn
+#======================================================================================
+#
+/run/beamOn 2000
+#
+# --EOF----------------------------------------------------------------------------------

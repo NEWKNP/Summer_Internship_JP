@@ -1,0 +1,108 @@
+#--------------------------------------------------------------------------------------
+#
+# P3_Sample Macro file 
+# All processes are included.
+# 
+#       2013-10   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+/control/verbose 2
+/run/verbose 2
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/common/materials.mac
+#
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/common/phys.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+/control/execute  ./P4_beamModule.mac
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#
+#  (Idle State)
+#
+#======================================================================================
+# [MA]Beam Module Implmentation
+#======================================================================================
+/G4M/Module/list
+#
+# -----------------------------------------
+# Installation of the other modules
+# ----------------------------------------- 
+#
+#/G4M/Module/install  MLC
+#/G4M/Module/install  Bolus
+#
+# --------------------------------------
+# DICOM Target settings and installation
+# --------------------------------------
+/G4M/DICOM/file        ./DICOM.dat
+/G4M/DICOM/ct2density  ./data/Sample/Dicom/CT2Density.dat
+/G4M/DICOM/paramtype   ./data/Sample/Dicom/CT2G4WATER.dat
+/G4M/DICOM/mesh         2.00 mm
+/G4M/DICOM/densityResol  0.01
+/G4M/DICOM/minvalue    -1000.
+/G4M/DICOM/maxvalue     2000.
+/G4M/DICOM/ctair       -1000.
+/G4M/DICOM/ctcutoff    -500.
+/G4M/DICOM/gantry      0. deg
+/G4M/DICOM/isocenter  0. 0. 10. cm
+/G4M/Module/install DICOM
+#
+#======================================================================================
+# [MA] IAEA Phase space or Beam
+#======================================================================================
+#
+/control/execute  ./P4_beam.mac
+#
+# IAEA phase space data file name
+#/control/alias IAEAFILEID  ~/IAEAphsp/IAEAphsp
+#
+# Reading IAEA phase space data
+#/control/foreach ./IAEAphspFromFile.mac  IAEA_PHSP_Z   600
+#
+# -------------------------------------------------------------------------------------
+# [OP] ROOT Output file Name
+# -------------------------------------------------------------------------------------
+/control/execute  ./macros/common/Hist3.mac
+/My/runaction/dumpfile P4_Sample.root
+#
+#======================================================================================
+# [OP] Visualization Settings
+#======================================================================================
+#/control/execute ./macros/common/vis3.mac
+#
+#======================================================================================
+# [MA] BeamOn
+#======================================================================================
+#
+/run/beamOn 10000
+#
+#======================================================================================
+# [OP] Dump the grid information of DICOM geometry
+#======================================================================================
+/G4M/Module/select DICOM
+/G4M/Module/lang  10
+/G4M/Module/dumpToFile  rtdose.sh
+/G4M/Module/lang  1
+/G4M/Module/dumpToFile   grid.dat
+#
+# --EOF----------------------------------------------------------------------------------

@@ -1,0 +1,56 @@
+########################################################################
+# EM processes including generic ions.
+########################################################################
+#/My/physics/register G4EmStandardPhysics
+#/My/physics/register G4EmStandardPhysics_option1
+#/My/physics/register G4EmStandardPhysics_option2
+/My/physics/register G4EmStandardPhysics_option3
+#/My/physics/register G4EmStandardPhysics_option4
+#/My/physics/register G4EmDNAPhysics
+#/My/physics/register G4EmLivermorePhysics
+#/My/physics/register G4EmPenelopePhysics
+########################################################################
+# Elastic process for hadrons. 
+########################################################################
+/My/physics/register G4HadronElasticPhysics
+########################################################################
+# Inelastic processes except for ions. 
+########################################################################
+#/My/physics/register G4HadronPhysicsFTFP_BERT
+#/My/physics/register G4HadronPhysicsFTFP_BERT_HP
+#/My/physics/register G4HadronPhysicsFTFP_BERT_TRV
+/My/physics/register G4HadronPhysicsFTF_BIC
+#/My/physics/register G4HadronPhysicsQGSP_BERT
+#/My/physics/register G4HadronPhysicsQGSP_BERT_HP
+#/My/physics/register G4HadronPhysicsQGSP_BIC
+#/My/physics/register G4HadronPhysicsQGSP_BIC_HP
+#/My/physics/register G4HadronPhysicsQGSP_FTFP_BERT
+#/My/physics/register G4HadronPhysicsQGS_BIC
+#/My/physics/register G4HadronPhysicsShielding
+########################################################################
+# Stopping Physics  (Capture)
+########################################################################
+/My/physics/register G4StoppingPhysics
+########################################################################
+# Radioactive decay
+########################################################################
+/My/physics/register G4RadioactiveDecayPhysics
+########################################################################
+# Inelastic Ions physics including Generic Ions. 
+########################################################################
+/My/physics/register G4IonBinaryCascadePhysics
+#/My/physics/register G4IonINCLXXPhysics
+#/My/physics/register G4IonQMDPhysics
+#/My/physics/register G4IonPhysics
+########################################################################
+# Decay Physics
+########################################################################
+/My/physics/register G4DecayPhysics
+########################################################################
+# VERBOSE
+########################################################################
+/My/physics/verbose 0
+##
+# Enable production cut for gamma intractions 
+# (Photoelectron and compton electron )
+###/process/em/applyCuts true

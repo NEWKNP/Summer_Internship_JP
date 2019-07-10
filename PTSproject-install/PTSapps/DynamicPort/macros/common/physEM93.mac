@@ -1,0 +1,50 @@
+###########################################
+# e+ / e- / gamma  QED processes          #
+#  Select only one process                #
+###########################################
+#/My/physics/register LowEElectroMagnetic
+#/My/physics/register PenelopeElectroMagnetic
+/My/physics/register STDElectroMagnetic
+###########################################
+# hadron QED processes                    #
+#  i.e Ionization                         #
+#  Select only one process                #
+###########################################
+#/My/physics/register LowEHadronQED
+/My/physics/register HadronQED
+###########################################
+# Ion processes                           #
+#  includes all process                   #
+#  i.e Ionization/Elastic/Inelastic       #
+###########################################
+#/My/physics/register LowEIon
+/My/physics/register Ion
+###########################################
+# Hadron Inelastic processes              #
+#  Select only one                        #
+###########################################
+#/My/physics/register hadronLHEP_PRECO_HP
+#/My/physics/register hadronLHEP_BERT_HP
+#/My/physics/register hadronQGSP_BIC_HP 
+#/My/physics/register hadronLHEP_JQMD_HP
+###########################################
+# Hadron Elastic processes                #
+###########################################
+#/My/physics/register hadronElastic
+#/My/physics/register UhadronElastic
+###########################################
+# Capture processes  (mu/hadron)          #
+###########################################
+#/My/physics/register QStopping
+###########################################
+# Decay processes                         #
+###########################################
+/My/physics/register Decay
+###########################################
+# RadioactiveDecay processes                         #
+###########################################
+#/My/physics/register RadioactiveDecay
+###########################################
+# Muon processes                          #
+###########################################
+#/My/physics/register Muon

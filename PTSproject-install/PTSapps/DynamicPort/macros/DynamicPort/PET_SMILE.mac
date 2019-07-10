@@ -1,0 +1,36 @@
+/G4M/Module/install PET
+/G4M/Module/select PET
+/G4M/Module/translate 0 0 800 mm
+#
+/G4M/Module/cloneIfExist PET PET1 1 0 0 -800 mm 0 180 0 deg
+#
+/G4M/Module/select SMILE
+/G4M/Module/translate 0 800 0 mm
+/G4M/Module/rotate 90. 0 0. deg
+/G4M/Module/install SMILE
+#
+/G4M/DICOM/select      DICOM
+/G4M/DICOM/file        ./DICOM.dat
+/G4M/DICOM/mesh         5.00 mm
+#/G4M/DICOM/winXmin     -100.0 mm
+#/G4M/DICOM/winXmax     +100.0 mm
+#/G4M/DICOM/winYmin     -100.0  mm
+#/G4M/DICOM/winYmax     +10.0 mm
+#/G4M/DICOM/winZmin       0.0  mm
+#/G4M/DICOM/winZmax     +50.0 mm
+#/G4M/DICOM/trim        true
+/G4M/DICOM/densityResol  0.01
+/G4M/DICOM/minvalue    -1000.
+/G4M/DICOM/maxvalue     2000.
+/G4M/DICOM/ctair       -1000.
+/G4M/DICOM/ctcutoff    -500.
+/G4M/DICOM/ct2density  ./data/Sample/Dicom/CT2Density.dat
+/G4M/DICOM/paramtype   ./data/Sample/Dicom/CT2G4WATER.dat
+#/G4M/DICOM/gantry  45. deg
+# with CEREBRIX_PTSim CT image, Isocenter should be defined.
+/G4M/DICOM/isocenter  0. 0. 10. cm
+/G4M/DICOM/vis false
+/G4M/Module/install DICOM
+#
+
+

@@ -1,0 +1,13 @@
+/My/runaction/ntuple/addColumn JST evno I
+/My/runaction/ntuple/addColumn JST trkid I
+/My/runaction/ntuple/addColumn JST pid I
+/My/runaction/ntuple/addColumn JST de  F  MeV
+/My/runaction/ntuple/addColumn JST ix  I 
+/My/runaction/ntuple/addColumn JST iy  I 
+/My/runaction/ntuple/addColumn JST iz  I 
+/My/runaction/ntuple/addColumn JST px F MeV
+/My/runaction/ntuple/addColumn JST py F MeV
+/My/runaction/ntuple/addColumn JST pz F MeV
+/My/runaction/ntuple/addColumn JST xvtx F mm
+/My/runaction/ntuple/addColumn JST yvtx F mm
+/My/runaction/ntuple/addColumn JST zvtx F mm

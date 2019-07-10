@@ -1,0 +1,14 @@
+Air 13
+Aluminium       0       120     0.015   40
+Aluminium       0       120     0.015   1
+Gold            0       120     0.002   -4.989
+Copper          0       120     0.020   -5.000
+Kapton          0       120     0.040   -5.966
+Copper          0       120     0.008   -6.000
+Nickel          0       110     0.002   -8.000
+Gold            0       120     0.001   -8.500
+Aluminium       0       120     0.015   -15
+Aluminium       0       120     0.015   -35
+Aluminium       120     150     10      -40
+Aluminium       120     150     10      45
+Aluminium       145     150     75      2.5

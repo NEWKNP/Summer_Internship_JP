@@ -1,0 +1,34 @@
+#======================================================================================
+# [MA] Beam Module Registration
+#======================================================================================
+#
+#Command                        Name              Class             Parameter file                                         Position           Rotation
+#
+/Dynamic/Module/register        Room              G4MRoom           ./data/MedLinac/G4MRoom/room.dat                         0. 0. 0. mm        0. 0. 0. deg
+/Dynamic/Module/register        TargetA           G4MBox            ./data/MedLinac/G4MBox/targetA.dat                       0. 0. 997.9945 mm 0. 0. 0. deg
+/Dynamic/Module/register        TargetB           G4MBox            ./data/MedLinac/G4MBox/targetB.dat                       0. 0. 999.2264 mm 0. 0. 0. deg
+/Dynamic/Module/register        UpperCollimator   G4MDiskCollimator ./data/MedLinac/G4MDiskCollimator/UpperCollimator.dat    0. 0. 1010. mm     0. 0. 0. deg
+/Dynamic/Module/register        LowerCollimator   G4MPolyCones      ./data/MedLinac/G4MPolyCones/LowerCollimator.dat         0. 0. 938. mm      0. 0. 0. deg
+/Dynamic/Module/register        BeWindow          G4MDisk           ./data/MedLinac/G4MDisk/BeWindow.dat                     0. 0. 900. mm      0. 0. 0. deg
+/Dynamic/Module/register        FFL1A             G4MSPolyCone      ./data/MedLinac/G4MSPolyCone/FFL1A.dat                   0. 0. 870. mm      0. 0. 0. deg
+/Dynamic/Module/register        FFL6_1            G4MDisk           ./data/MedLinac/G4MDisk/FFL6_1.dat                       0. 0. 844.595 mm   0. 0. 0. deg
+/Dynamic/Module/register        IonizationChamber G4MTubsMonitor    ./data/MedLinac/G4MTubsMonitor/IC.dat                    0. 0. 840.5 mm      0. 0. 0. deg
+/Dynamic/Module/register        Mirror            G4MDisk           ./data/MedLinac/G4MDisk/Mirror.dat                       0. 0. 825. mm      0. 12. 0. deg
+/Dynamic/Module/register        Wedge             G4MWedge          ./data/MedLinac/G4MWedge/wedge.dat                       0. 0. 790. mm      0. 0. 0. deg
+/Dynamic/Module/register        JawY1             G4MJaw            ./data/MedLinac/G4MJaw/jawY1.dat                        0. 0. 730. mm      0. 0. 0. deg
+/Dynamic/Module/register        JawY2             G4MJaw            ./data/MedLinac/G4MJaw/jawY2.dat                        0. 0. 730. mm      0. 0. 0. deg
+/Dynamic/Module/register        JawX1             G4MJaw            ./data/MedLinac/G4MJaw/jawX1.dat                        0. 0. 640. mm      0. 0. 0. deg
+/Dynamic/Module/register        JawX2             G4MJaw            ./data/MedLinac/G4MJaw/jawX2.dat                        0. 0. 640. mm      0. 0. 0. deg
+/Dynamic/Module/register        MLC               G4MMLCX           ./data/MedLinac/G4MMLCX/CMLC.dat                         0. 0. 535. mm      0. 0. 0. deg
+#
+#
+#
+#- Sensitive Module
+#/Dynamic/Module/WaterPhantom/register
+/Dynamic/Module/DICOM/register
+#-Alternatively with geometric parameters for Sensitive modules
+/Dynamic/Module/register WaterPhantom  G4MWaterPhantom  ./data/MedLinac/G4MWaterPhantom/waterphantom.dat 0. 0.  -250. mm 0. 180. 0. deg
+#/Dynamic/Module/register DICOM         G4MDICOM         ./data/MedLinac/G4MDICOM/dicom.dat               0. 0.    0. mm 0. 0. 0. deg
+#
+#
+

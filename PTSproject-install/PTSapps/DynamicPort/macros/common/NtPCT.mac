@@ -1,0 +1,9 @@
+/My/runaction/ntuple/addColumn PCT evno I
+/My/runaction/ntuple/addColumn PCT trkid I
+/My/runaction/ntuple/addColumn PCT pid I
+/My/runaction/ntuple/addColumn PCT x F mm
+/My/runaction/ntuple/addColumn PCT y F mm
+/My/runaction/ntuple/addColumn PCT z F mm
+/My/runaction/ntuple/addColumn PCT t F s
+/My/runaction/ntuple/addColumn PCT w F
+/My/runaction/ntuple/addColumn PCT ke F MeV

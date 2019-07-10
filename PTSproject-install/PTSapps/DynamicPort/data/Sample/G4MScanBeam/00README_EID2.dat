@@ -1,0 +1,4 @@
+3  <-- Number of lines  (Format for /G4M/ScanBeam/eidFile2 )
+0 100.  0.  0.  0.  0.  0.  <--  IDN  Energy(MeV)  dE(MeV)  SigmaSpotX(mm)  SigmaSpotY(mm)  SigmaAngleX(mrad) SigmaAngleY(mrad)
+1 200.  0.  0.  0.  0.  0.
+2 250.  0.  0.  0.  0.  0.

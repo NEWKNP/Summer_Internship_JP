@@ -1,0 +1,9 @@
+#
+/My/PrimaryGenerator/select IAEAphsp
+#
+#
+/G4M/IAEAphsp/file {IAEAFILEID} {IAEA_PHSP_Z}
+/G4M/IAEAphsp/recycle 0
+/G4M/IAEAphsp/totalParaRun 1
+/G4M/IAEAphsp/paraRunId 1
+/G4M/IAEAphsp/verbose 0

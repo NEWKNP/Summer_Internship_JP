@@ -1,0 +1,5 @@
+3 <=== Number of Data points.
+0  -100.  -100. +100 -100.  5.  <== EID Xs(mm) Ys(mm) Xe(mm) Ye(mm)  Intensity.
+1  -100.  +100. +100 +100   5.   (Line from (Xs,Ys) to (Xe,Ye)
+2  -100.  -100. +100 +100   5.
+

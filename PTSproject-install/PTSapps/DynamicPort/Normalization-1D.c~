@@ -1,0 +1,70 @@
+{
+    // create ROOT file
+    TH1* OImg = new TH1F("OImg", "X In XY", 512, -256, 256);
+    //TH1* OImg = new TH1F("OImg", "Y In YZ", 512, -256, 256);
+    //TH1* OImg = new TH1F("OImg", "Z In XZ", 512, -256, 256);
+
+    const Int_t Number = 4;
+    Double_t Red[Number]   = {0.0 , 0.5  , 0.5 , 1.0};
+    Double_t Blue[Number]  = {0.5 , 1.0  , 0.5 , 0.0};
+    Double_t Green[Number] = {0.0 , 0.5  , 1.0 , 1.0};
+    Double_t Stop[Number]  = {0.0 , 0.3 , 0.6 , 1.0};
+    const Int_t ndim = 512;
+    TColor::CreateGradientColorTable(Number,Stop,Red,Green,Blue,ndim);
+
+    Int_t i,j;
+    Float_t xy;
+    std::ifstream fin;
+ 
+    // input file name 2
+    fin.open("./result/reconstruct_sinogram_xy.csv"); // for xy
+    //fin.open("./result/reconstruct_sinogram_yz.csv"); // for yz
+    //fin.open("./result/reconstruct_sinogram_xz.csv"); // for xz
+    
+    if(fin.is_open()==false)
+    {
+        cout << "open error" << endl;
+        exit(1);
+    }
+    
+    for(i=1; i<=ndim; i++)
+    {
+        for(j=1; j<=ndim; j++)
+	{
+            fin >> xy;
+	    OImg -> SetBinContent(i, j, xy);
+	}
+    }
+    fin.close();
+
+    OImg->Print();
+
+    Double_t MR = 0;
+    // max bincontent
+    MR = OImg->GetBinContent(OImg->GetMaximumBin());
+    cout << MR << endl;
+/*
+    // normalization
+    TH1* nOImg = new TH1F("OImg", "X In XY", 512, -256, 256);
+    //TH1* nOImg = new TH1F("OImg", "Y In YZ", 512, -256, 256);
+    //TH1* nOImg = new TH1F("OImg", "Z In XZ", 512, -256, 256);
+
+    for(i=1; i<=ndim; i++)
+    {
+        Double_t BinContent = OImg->GetBinContent(i);
+        nOImg->SetBinContent(i, BinContent/MR);
+    }
+
+    nOImg->Draw();
+
+    // output file name
+    TFile fourRoot("Sample_x_final.root","RECREATE");
+    //TFile foutRoot("Sample_y_final.root","RECREATE");
+    //TFile fourRoot("Sample_z_final.root","RECREATE");
+
+    nOImg->Write();
+    
+    foutRoot.Write();
+    foutRoot.Close();
+*/
+}

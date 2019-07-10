@@ -1,0 +1,17 @@
+Sample0.mac : Proton, Wobbling, WaterPhantom: (GEOMETRY)
+Sample1.mac : Proton, Wobbling, WaterPhantom: (GEOMETRY)
+Sample2.mac : Proton, Wobbling, DICOM: (GEOMETRY)
+Sample3.mac : Proton, Wobbling, DICOM: (Parallel GEOMETRY)
+Sample4.mac : Proton, Wobbling, DICOM, RTS: (Parallel GEOMETRY, RTS)
+Sample5.mac : Proton, Wobbling, WaterPhantom: (IAEA Read)
+Sample6r.mac : Proton, Wobbling, WaterPhantom: (IAEA Read)
+Sample6w.mac : Proton, Wobbling, WaterPhantom: (IAEA Write)
+SamplePWLayer.mac : Proton, Wobbling, WaterPhantom: (Parallel, Layered Geom.)
+SamplePWScore.mac: Proton, Wobbling, WaterPhantom: (SCORING)
+SampleRTDose.mac:  (Gridinfo for RTDose)
+SampleRoIDICOM.mac : Proton, Wobbling, DICOM, RTS: (ROI Material Assignment)
+SampleRoIRepl.mac : Proton, Wobbling, DICOM, RTS: (ROI CT value Replacement)
+SampleRotating.mac : Proton, Rotating Module. (Rotating Modulator)
+SampleScan.mac : Proton, Scanning beam (SCAN BEAM)
+
+

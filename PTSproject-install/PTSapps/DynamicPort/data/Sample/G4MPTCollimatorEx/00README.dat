@@ -1,0 +1,8 @@
+160. 160. 70.     # full size of envelope in x,y,z
+Brass             # Material of envelope
+4                 # Number of data points 
+-50 -50           # x, y
+-50  50
+ 50  50
+ 50 -50
+1                 # direction. 1 clockwise, -1 anticlockwise

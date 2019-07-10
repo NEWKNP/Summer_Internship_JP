@@ -1,0 +1,6 @@
+/My/runaction/hist/enable DICOMCT false
+/My/runaction/hist/enable DICOM   true
+/My/runaction/hist/enable JST     true
+##/My/runaction/hist/enable JSTEdep true
+/My/runaction/hist/enable JSTDose true
+

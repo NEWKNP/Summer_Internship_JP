@@ -1,0 +1,7 @@
+Ar90Ethane10
+Ar90Ethane10    0
+0.001741  300.  101325 
+-1      
+2
+M       ArGas           0.90
+M       EthaneGas       0.10

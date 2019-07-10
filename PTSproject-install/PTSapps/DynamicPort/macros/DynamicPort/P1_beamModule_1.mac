@@ -1,0 +1,36 @@
+#======================================================================================
+# [MA] Beam Module Registration
+#======================================================================================
+#
+# Command                Name          Class              Parameter file                                 Position       Rotation
+#
+/Dynamic/Module/register Room          G4MRoom            ./data/Sample/G4MRoom/room.dat                 0. 0.    0. mm 0. 0. 0. deg
+/Dynamic/Module/register Extract       G4MDisk            ./data/Sample/G4MDisk/extract.dat              0. 0. 3500. mm 0. 0. 0. deg
+/Dynamic/Module/register Scatter       G4MDisk            ./data/Sample/G4MDisk/scatter.dat              0. 0. 2700. mm 0. 0. 0. deg
+/Dynamic/Module/register WobblerX      G4MWobblerMagnet   ./data/Sample/G4MWobblerMagnet/wobblerX0.dat    0. 0. 3200. mm 0. 0. 0. deg
+/Dynamic/Module/register WobblerY      G4MWobblerMagnet   ./data/Sample/G4MWobblerMagnet/wobblerY0.dat    0. 0. 3000. mm 0. 0. 0. deg
+/Dynamic/Module/register RidgeFilter   G4MRidgeFilter     ./data/Sample/G4MRidgeFilter/ridge.dat         0. 0. 2500. mm 0. 0. 0. deg
+/Dynamic/Module/register RangeShifter  G4MBox             ./data/Sample/G4MBox/degrader.dat              0. 0. 1850. mm 0. 0. 0. deg
+/Dynamic/Module/register MainMonitor   G4MTubsMonitor     ./data/Sample/G4MTubsMonitor/mainmonitor.dat   0. 0. 2200. mm 0. 0. 0. deg
+/Dynamic/Module/register SecondMonitor G4MTubsMonitor     ./data/Sample/G4MTubsMonitor/secondmonitor.dat 0. 0. 2000. mm 0. 0. 0. deg
+/Dynamic/Module/register FlatMonitor   G4MTubsMonitor     ./data/Sample/G4MTubsMonitor/flatmonitor.dat   0. 0. 1700. mm 0. 0. 0. deg
+/Dynamic/Module/register Collimator    G4MDiskStructure   ./data/Sample/G4MDiskStructure/collimator.dat  0. 0. 1500. mm 0. 0. 0. deg
+/Dynamic/Module/register MLC           G4MMLCX            ./data/Sample/G4MMLCX/mlc.dat                  0. 0. 1000. mm 0. 0. 0. deg
+/Dynamic/Module/register Bolus         G4MBolus           ./data/Sample/G4MBolus/bolus.dat               0. 0.  700. mm 0. 0. 0. deg
+#
+#- Sensitive Module
+/Dynamic/Module/DICOM/register
+#-Alternatively with geometric parameters for Sensitive modules
+/Dynamic/Module/register WaterPhantom  G4MWaterPhantom  ./data/Sample/G4MWaterPhantom/waterphantom.dat 0. 0.  -250. mm 0. 180. 0. deg
+#
+# -----------------------------------------
+# Wobbling Field activation
+# ----------------------------------------- 
+/Dynamic/Module/updateEvent/wobbling  WobblerX  WobblerY  true
+#
+# -----------------------------------------
+# Rotating Module
+# ----------------------------------------- 
+#/Dynamic/Module/updateEvent/rotating  Propeller  true
+#
+

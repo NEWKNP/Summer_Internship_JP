@@ -1,0 +1,18 @@
+#======================================================================================
+# [MA] Beam Module Registration
+#======================================================================================
+#
+# Command                Name          Class              Parameter file                                 Position       Rotation
+#
+/Dynamic/Module/register Room          G4MRoom            ./data/Sample/G4MRoom/room.dat                 0. 0. 0. mm    0. 0. 0. deg
+#
+#- Sensitive Module
+#-Alternatively with geometric parameters for Sensitive modules
+/Dynamic/Module/register WaterPhantom  G4MWaterPhantom  ./data/Sample/G4MWaterPhantom/waterphantom.dat 0. 0. 0. mm     0. 180. 0. deg
+#/Dynamic/Module/register DICOM         G4MDICOM         ./data/Sample/G4MDICOM/dicom.dat               0. 0. 0. mm    0. 0. 0. deg
+#
+/Dynamic/Module/register BoxDetector    G4MPCTBoxDetector ./data/Sample/G4MPCTBoxDetector/tile.dat 0. 0. -300. mm 0. 0. 0. deg
+/Dynamic/Module/register TubeDetector    G4MPCTTubeDetector ./data/Sample/G4MPCTTubeDetector/tube.dat 0. 0. 0. mm 0. 0. 0. deg
+#
+#
+

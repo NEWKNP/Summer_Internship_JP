@@ -1,0 +1,19 @@
+#/vis/viewer/reset
+/vis/open OGL
+#/vis/open DAWNFILE
+#/vis/open VRML2FILE
+
+#/vis/scene/create
+#/vis/scene/add/volume
+#/vis/sceneHandler/attach
+
+/vis/viewer/set/viewpointThetaPhi -90. 90.
+/vis/drawVolume
+
+/tracking/storeTrajectory 1
+/vis/scene/add/trajectories
+/vis/scene/endOfEventAction accumulate
+
+#/vis/viewer/flush
+
+

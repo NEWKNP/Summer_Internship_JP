@@ -1,0 +1,58 @@
+########################################################################
+# EM processes including generic ions.
+########################################################################
+#/My/physics/register G4EmStandardPhysics
+#/My/physics/register G4EmStandardPhysics_option1
+#/My/physics/register G4EmStandardPhysics_option2
+/My/physics/register G4EmStandardPhysics_option3
+#/My/physics/register G4EmDNAPhysics
+#/My/physics/register G4EmLivermorePhysics
+#/My/physics/register G4EmPenelopePhysics
+########################################################################
+# Elastic process for hadrons. 
+########################################################################
+/My/physics/register G4HadronElasticPhysics
+########################################################################
+# Inelastic processes except for ions. 
+########################################################################
+#/My/physics/register HadronPhysicsCHIPS
+#/My/physics/register HadronPhysicsFTFP_BERT
+#/My/physics/register HadronPhysicsFTFP_BERT_TRV
+#/My/physics/register HadronPhysicsFTF_BIC
+#/My/physics/register HadronPhysicsLHEP
+#/My/physics/register HadronPhysicsLHEP_EMV
+#/My/physics/register HadronPhysicsQGSC_BERT
+#/My/physics/register HadronPhysicsQGSC_CHIPS
+#/My/physics/register HadronPhysicsQGSP
+#/My/physics/register HadronPhysicsQGSP_BERT
+#/My/physics/register HadronPhysicsQGSP_BERT_CHIPS
+#/My/physics/register HadronPhysicsQGSP_BERT_HP
+#/My/physics/register HadronPhysicsQGSP_BERT_NOLEP
+#/My/physics/register HadronPhysicsQGSP_BERT_TRV
+#/My/physics/register HadronPhysicsQGSP_BIC
+#/My/physics/register HadronPhysicsQGSP_BIC_HP
+#/My/physics/register HadronPhysicsQGSP_FTFP_BERT
+#/My/physics/register HadronPhysicsQGSP_INCL_ABLA
+#/My/physics/register HadronPhysicsQGS_BIC
+#/My/physics/register HadronPhysicsShielding
+########################################################################
+# Stopping Physics  (Capture)
+########################################################################
+#/My/physics/register G4QStoppingPhysics
+########################################################################
+# Radioactive decay
+########################################################################
+#/My/physics/register G4RadioactiveDecayPhysics
+########################################################################
+# Inelastic Ions physics including Generic Ions. 
+########################################################################
+#/My/physics/register G4IonBinaryCascadePhysics
+#/My/physics/register G4IonInclAblaPhysics
+#/My/physics/register G4IonQMDPhysics
+#/My/physics/register G4QIonPhysics
+########################################################################
+# Decay Physics
+########################################################################
+#/My/physics/register G4DecayPhysics
+#
+

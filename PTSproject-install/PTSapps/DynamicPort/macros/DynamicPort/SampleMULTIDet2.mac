@@ -1,0 +1,172 @@
+#--------------------------------------------------------------------------------------
+#
+# Macro file is for Bragg peak distribution in water.
+# The energies of proton are chosen to be 150 MeV, 190 MeV, and 230 MeV.
+# All processes are included.
+# Though measurements are done using small detector (radius ~ 5mm), this macro
+# uses simple plate of 200. x 200. x 1. mm water. The plates are aligned to z-axis.
+# 
+#       2006 AUG. 30   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+/control/verbose 1
+/run/verbose 0
+/tracking/verbose 0
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/common/materials.mac
+#
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/common/phys.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+##
+/Dynamic/Module/register Room          G4MRoom            ./data/Sample/G4MRoom/room.dat                 0. 0.    0. mm 0. 0. 0. deg
+/Dynamic/Module/register WPA  G4MWaterPhantom  ./data/Sample/G4MWaterPhantom/waterphantom.dat 0. 0.  -1250. mm 0. 180. 0. deg
+/Dynamic/Module/register WPB  G4MWaterPhantom  ./data/Sample/G4MWaterPhantom/waterphantom.dat 0. 0.  +1250. mm 0. 180. 0. deg
+/Dynamic/Module/register WPC  G4MWaterPhantom  ./data/Sample/G4MWaterPhantom/waterphantom.dat 0. 0.      0. mm 0. 180. 0. deg
+##/Dynamic/Module/register CylinderPhantom  G4MCylinderPhantom  ./data/Sample/G4MCylinderPhantom/cylphantom.dat 0. 0. 0. mm 0. 180. 0. deg
+/Dynamic/Module/DICOM/register
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#
+#  (Idle State)
+#
+#======================================================================================
+# [MA]Beam Module Implmentation
+#======================================================================================
+/G4M/Module/list
+#
+# -----------------------------------------
+# (A) First BOX Water Phantom settings and installation
+# ----------------------------------------- 
+## WPA
+/G4M/Module/select WPA
+/G4M/Module/translate 0. 0. +1000. mm
+## Water Phantom A Size (Half length)
+/G4M/Module/WPA/size 150. 150. 10.0 mm
+## Water Phantom SD Size (Half length) 
+/G4M/Module/WPA/sdsize 150.0 150.0 10.0 mm
+## Segmentation of water phantom ( Nx, Ny, Nz )
+/G4M/Module/WPA/dim 150. 150. 1.
+## Installation of WaterPhantom. 
+/G4M/Module/install WPA
+/My/runaction/ntuple/create WPA WPA/HitsCollection
+/My/runaction/ntuple/addColumn WPA evno I
+/My/runaction/ntuple/addColumn WPA pid I
+/My/runaction/ntuple/addColumn WPA de  F  keV
+/My/runaction/ntuple/addColumn WPA ix  I  
+/My/runaction/ntuple/addColumn WPA iy  I  
+/My/runaction/ntuple/addColumn WPA iz  I  
+#
+# -----------------------------------------
+# (B) Second BOX Water Phantom settings and installation
+# ----------------------------------------- 
+## WPB
+/G4M/Module/select WPB
+/G4M/Module/translate 0. 0. -1000. mm
+/G4M/Module/WPB/size 150. 150. 150. mm
+/G4M/Module/WPB/sdsize 150.0 150.0 150.0 mm
+/G4M/Module/WPB/dim 150. 150. 150.
+/G4M/Module/install WPB
+/My/runaction/ntuple/create WPB WPB/HitsCollection
+/My/runaction/ntuple/addColumn WPB evno I
+/My/runaction/ntuple/addColumn WPB pid I
+/My/runaction/ntuple/addColumn WPB de  F  keV
+/My/runaction/ntuple/addColumn WPB ix  I 
+/My/runaction/ntuple/addColumn WPB iy  I 
+/My/runaction/ntuple/addColumn WPB iz  I 
+#
+# -----------------------------------------
+# (C) Third BOX Water Phantom settings and installation
+# ----------------------------------------- 
+## WPC
+/G4M/Module/select WPC
+/G4M/Module/translate 0. 0. 0. mm
+/G4M/Module/WPC/size 50. 50. 50. mm
+/G4M/Module/WPC/sdsize 50.0 50.0 50.0 mm
+/G4M/Module/WPC/dim   50. 50. 50.
+/G4M/Module/install WPC
+/My/runaction/ntuple/create WPC WPC/HitsCollection
+/My/runaction/ntuple/addColumn WPC evno I
+/My/runaction/ntuple/addColumn WPC pid I
+/My/runaction/ntuple/addColumn WPC de  F  keV
+/My/runaction/ntuple/addColumn WPC ix  I  
+/My/runaction/ntuple/addColumn WPC iy  I  
+/My/runaction/ntuple/addColumn WPC iz  I  
+#
+#
+# --------------------------------------
+# (SAMPLE) DICOM Target settings and installation
+# --------------------------------------
+#/G4M/DICOM/select      DICOM
+#/G4M/DICOM/file        ./DICOM.dat
+#/G4M/DICOM/mesh        5.00 mm
+#/G4M/DICOM/densityResol  0.01
+#/G4M/DICOM/minvalue    -1000.
+#/G4M/DICOM/maxvalue     2000.
+#/G4M/DICOM/ctair       -1000.
+#/G4M/DICOM/ctcutoff    -500.
+#/G4M/DICOM/ct2density  ./data/Sample/Dicom/CT2Density.dat
+#/G4M/DICOM/paramtype   ./data/Sample/Dicom/CT2G4WATER.dat
+###/G4M/DICOM/gantry  45. deg
+# with CEREBRIX_PTSim CT image, Isocenter should be defined.
+#/G4M/DICOM/isocenter  0. 0. 10. cm
+#/G4M/Module/install DICOM
+#
+#/My/runaction/ntuple/create DCM DICOM/HitsCollection
+#/My/runaction/ntuple/addColumn DCM evno I
+#/My/runaction/ntuple/addColumn DCM pid I
+#/My/runaction/ntuple/addColumn DCM de  F  keV
+#/My/runaction/ntuple/addColumn DCM ix  I  
+#/My/runaction/ntuple/addColumn DCM iy  I  
+#/My/runaction/ntuple/addColumn DCM iz  I  
+#
+#--------------------------------------------------
+#   TH3   Edep and Dose
+#-------------------------------------------------
+/My/runaction/hist/enable JSTEdep false WPA
+/My/runaction/hist/enable JSTDose false  DICOM
+/My/runaction/hist/enable DICOMCT false
+#======================================================================================
+# [MA] Beam Parameters
+#======================================================================================
+/control/execute macros/DynamicPort/particleGun.mac
+#
+#
+# -------------------------------------------------------------------------------------
+# [OP] ROOT Output file Name
+# -------------------------------------------------------------------------------------
+/My/runaction/dumpfile SampleMULTIDet2.root
+#
+#======================================================================================
+# [OP] Visualization Settings
+#======================================================================================
+##/control/execute ./macros/common/vis.mac
+#
+#======================================================================================
+# [MA] BeamOn
+#======================================================================================
+#
+# HandsOn3
+#
+/run/beamOn 10000
+#
+# --EOF----------------------------------------------------------------------------------

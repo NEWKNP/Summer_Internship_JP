@@ -1,0 +1,81 @@
+#--------------------------------------------------------------------------------------
+#
+# Macro file is for Bragg peak distribution in water.
+# The energies of proton are chosen to be 150 MeV, 190 MeV, and 230 MeV.
+# All processes are included.
+# Though measurements are done using small detector (radius ~ 5mm), this macro
+# uses simple plate of 200. x 200. x 1. mm water. The plates are aligned to z-axis.
+# 
+#       2006 AUG. 30   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+#/control/verbose 2
+#/run/verbose 2
+#/tracking/verbose 1
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/MedLinac/materials.mac
+#
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/MedLinac/phys.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+/control/execute  ./macros/MedLinac/beamModule.mac
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#======================================================================================
+# [MA]Beam Module Implmentation
+#======================================================================================
+/G4M/Module/list
+# -----------------------------------------
+# Water Phantom settings and installation
+# ----------------------------------------- 
+## Water Phantom Size (Half length)
+/G4M/Module/Phantom/size 101. 101. 151. mm
+## Water Phantom SD Size (Half length) 
+/G4M/Module/Phantom/sdsize 101. 101. 151. mm
+## Segmentation of water phantom ( Nx, Ny, Nz )
+/G4M/Module/Phantom/dim  101. 101. 151.
+/G4M/Module/Phantom/material G4_WATER
+/G4M/Module/select WaterPhantom
+/G4M/Module/translate 0. 0. 0. mm 
+## Installation of WaterPhantom. 
+/G4M/Module/install WaterPhantom
+#
+#
+#======================================================================================
+# [OP] Particle Generator
+#======================================================================================
+#
+/control/execute  ./macros/MedLinac/Hist_2.mac
+/control/execute  ./macros/MedLinac/NtJST_2a.mac
+#
+/My/runaction/dumpfile  OutML3_2
+#
+/G4M/Module/installBM
+#
+/control/execute ./macros/common/vis.mac
+#
+/My/PrimaryGenerator/select   IAEAphsp
+/G4M/IAEAphsp/file   IAEAphsp  00
+#
+###/run/beamOn 1000000
+#
+# --EOF----------------------------------------------------------------------------------

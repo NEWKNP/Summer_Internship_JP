@@ -1,0 +1,68 @@
+#======================================================================================
+# [MA] Beam Module Registration
+#======================================================================================
+#
+# Command                Name          Class              Parameter file                                 Position       Rotation
+#
+/Dynamic/Module/register Room          G4MRoom            ./data/Sample/G4MRoom/room.dat                 0. 0.    0. mm 0. 0. 0. deg
+/Dynamic/Module/register Extract       G4MDisk            ./data/Sample/G4MDisk/extract.dat              0. 0. 3500. mm 0. 0. 0. deg
+/Dynamic/Module/register Scatter       G4MDisk            ./data/Sample/G4MDisk/scatter.dat              0. 0. 2700. mm 0. 0. 0. deg
+/Dynamic/Module/register WobblerX      G4MWobblerMagnet   ./data/Sample/G4MWobblerMagnet/wobblerX0.dat    0. 0. 3200. mm 0. 0. 0. deg
+/Dynamic/Module/register WobblerY      G4MWobblerMagnet   ./data/Sample/G4MWobblerMagnet/wobblerY0.dat    0. 0. 3000. mm 0. 0. 0. deg
+/Dynamic/Module/register RidgeFilter   G4MRidgeFilter     ./data/Sample/G4MRidgeFilter/ridge.dat         0. 0. 2500. mm 0. 0. 0. deg
+#/Dynamic/Module/register Propeller     G4MPropellerBlades ./data/Sample/G4MPropellerBlades/blade.dat     0. 0. 2500. mm 0. 0. 0. deg
+/Dynamic/Module/register RangeShifter  G4MBox             ./data/Sample/G4MBox/degrader.dat              0. 0. 1850. mm 0. 0. 0. deg
+/Dynamic/Module/register MainMonitor   G4MTubsMonitor     ./data/Sample/G4MTubsMonitor/mainmonitor.dat   0. 0. 2200. mm 0. 0. 0. deg
+/Dynamic/Module/register SecondMonitor G4MTubsMonitor     ./data/Sample/G4MTubsMonitor/secondmonitor.dat 0. 0. 2000. mm 0. 0. 0. deg
+/Dynamic/Module/register FlatMonitor   G4MTubsMonitor     ./data/Sample/G4MTubsMonitor/flatmonitor.dat   0. 0. 1700. mm 0. 0. 0. deg
+/Dynamic/Module/register Collimator    G4MDiskStructure   ./data/Sample/G4MDiskStructure/collimator.dat  0. 0. 1500. mm 0. 0. 0. deg
+/Dynamic/Module/register MLC           G4MMLCX            ./data/Sample/G4MMLCX/mlc.dat                  0. 0. 1000. mm 0. 0. 0. deg
+###/Dynamic/Module/register MLC           G4MMLCXV            ./data/Sample/G4MMLCXV/mlc.dat                  0. 0. 1000. mm 0. 0. 0. deg
+/Dynamic/Module/register Bolus         G4MBolus           ./data/Sample/G4MBolus/bolus.dat               0. 0.  700. mm 0. 0. 0. deg
+#/Dynamic/Module/register Bolus         G4MHoneyCombBolus   ./data/Sample/G4MHoneyCombBolus/bolus.dat               0. 0.  700. mm 0. 0. 0. deg
+/Dynamic/Module/register Couch         G4MCouch           ./data/Sample/G4MCouch/couch.dat               0. 0.  -300. mm 0. 0. 0. deg
+/Dynamic/Module/register Dumper        G4MDiskDumper      ./data/Sample/G4MDiskDumper/dumper.dat         0. 0.  700. mm 0. 0. 0. deg
+#/Dynamic/Module/register APhantom      G4MAnatomicalPhantom ./data/Sample/G4MAnatomicalPhantom/r150z150.dat 0. 0. 2345. mm 0. 0. 0. deg
+#
+#
+/Dynamic/Module/register hole_box   G4MBox        ./data/Sample/G4MBoxComposer/hole_box.dat    0. 50. 0. mm 0. 0. 0. deg
+/Dynamic/Module/register hole_disk  G4MDisk        ./data/Sample/G4MBoxComposer/hole_disk.dat  0. -50. 0. mm 0. 0. 0. deg
+/Dynamic/Module/register BoxComb    G4MBoxComposer ./data/Sample/G4MBoxComposer/CombBox.dat     0. 0. 0. mm 0. 0. 0. deg
+#
+#
+/Dynamic/Module/register hole_box   G4MBox        ./data/Sample/G4MDiskComposer/hole_box.dat    0. 50. 0. mm 0. 0. 0. deg
+/Dynamic/Module/register hole_disk  G4MDisk        ./data/Sample/G4MDiskComposer/hole_disk.dat  0. -50. 0. mm 0. 0. 0. deg
+/Dynamic/Module/register DiskComb   G4MDiskComposer ./data/Sample/G4MDiskComposer/CombDisk.dat     0. 0. 0. mm 0. 0. 0. deg
+#
+/Dynamic/Module/register JawX1   G4MJaw  ./data/Sample/G4MJaw/jawX1.dat     0. 0. 0. mm 0. 0. 0. deg
+/Dynamic/Module/register JawX2   G4MJaw  ./data/Sample/G4MJaw/jawX2.dat     0. 0. 0. mm 0. 0. 0. deg
+/Dynamic/Module/register JawY1   G4MJaw  ./data/Sample/G4MJaw/jawY1.dat     0. 0. 0. mm 0. 0. 0. deg
+/Dynamic/Module/register JawY2   G4MJaw  ./data/Sample/G4MJaw/jawY2.dat     0. 0. 0. mm 0. 0. 0. deg
+#####
+/Dynamic/Module/register PET      G4MBoxDetector ./data/Sample/G4MBoxDetector/PET.dat  0. 0. 1000. mm 0. 0. 0. deg
+/Dynamic/Module/register ETCC      G4MBoxDetector ./data/Sample/G4MBoxDetector/ETCC.dat  0. 0. 1000. mm 0. 0. 0. deg
+#
+#####/Dynamic/Module/register SMILE      G4MSMILE_I_Geo ./dummy.dat  0. 1500. 0. mm 0. 0. 0. deg
+##
+/Dynamic/Module/register TetM   G4MTetModule  ./data/Sample/G4MTetModule/tetmodule.dat     0. 0. 0. mm 0. 0. 0. deg
+#
+#- Sensitive Module
+#/Dynamic/Module/WaterPhantom/register
+/Dynamic/Module/DICOM/register
+#-Alternatively with geometric parameters for Sensitive modules
+/Dynamic/Module/register WaterPhantom  G4MWaterPhantom  ./data/Sample/G4MWaterPhantom/waterphantom.dat 0. 0.  -250. mm 0. 180. 0. deg
+#/Dynamic/Module/register DICOM         G4MDICOM         ./data/Sample/G4MDICOM/dicom.dat               0. 0.    0. mm 0. 0. 0. deg
+#
+#/Dynamic/Module/register BoxDetector    G4MPCTBoxDetector ./data/Sample/G4MPCTBoxDetector/tile.dat 0. 0. -160. mm 0. 0. 0. deg
+#
+# -----------------------------------------
+# Wobbling Field activation
+# ----------------------------------------- 
+/Dynamic/Module/updateEvent/wobbling  WobblerX  WobblerY  true
+#
+# -----------------------------------------
+# Rotating Module
+# ----------------------------------------- 
+#/Dynamic/Module/updateEvent/rotating  Propeller  true
+#
+

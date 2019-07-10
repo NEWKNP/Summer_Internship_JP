@@ -1,0 +1,123 @@
+#--------------------------------------------------------------------------------------
+#
+# ETCC Macro file 
+# All processes are included.
+# 
+#       2016-03   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+/control/verbose 2
+#/run/verbose 2
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/common/materials.mac
+/G4M/Material/create  TPCGas
+#
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/common/phys.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+/control/execute  ./macros/DynamicPort/beamModule.mac
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#
+#  (Idle State)
+#
+#======================================================================================
+# [MA]Beam Module Implmentation
+#======================================================================================
+/G4M/Module/list
+# -----------------------------------------
+# Water Phantom settings and installation
+# ----------------------------------------- 
+## Water Phantom Size (Half length)
+/G4M/Module/Phantom/size 150. 150. 250.0 mm
+## Water Phantom SD Size (Half length) 
+/G4M/Module/Phantom/sdsize 150.0 150.0 250.0 mm
+## Segmentation of water phantom ( Nx, Ny, Nz )
+/G4M/Module/Phantom/dim 1. 1. 1.
+## Installation of WaterPhantom. 
+/G4M/Module/select WaterPhantom
+/G4M/Module/translate 0. 0. 0. mm
+/G4M/Module/install WaterPhantom
+#
+# -----------------------------------------
+# Installation of the other modules
+# ----------------------------------------- 
+#
+/G4M/Module/install ETCC
+/G4M/Module/select ETCC
+/G4M/Module/translate 300. 0. 0. mm
+/G4M/Module/rotate 0. 90. 0. deg
+####/G4M/Module/translate 0. 0. 500. mm
+####/G4M/Module/rotate 0. 0. 0. deg
+#
+/G4M/Module/cloneIfExist ETCC ETCC2 1 -300 0 0 mm 0 -90 0 deg
+#==============ne========================================================================
+# [MA] Beam Parameters
+#======================================================================================
+/control/execute macros/DynamicPort/particleGun.mac
+#
+# -------------------------------------------------------------------------------------
+# [OP] ROOT Output file Name
+# -------------------------------------------------------------------------------------
+/My/runaction/hist/enable DICOMCT false
+/My/runaction/hist/enable DICOM   false
+/My/runaction/hist/enable JSTEdep false
+/My/runaction/hist/enable JSTDose false
+#
+#
+/My/runaction/dumpfile ETCC_Sample.root
+#
+#======================================================================================
+# [OP] Visualization Settings
+#======================================================================================
+/control/execute ./macros/common/vis3.mac
+#
+#
+/G4M/Module/dumpLV ETCC
+#/G4M/Module/selectLV  ETCC 1
+#/G4M/Module/attachSD ETCC 
+#
+/My/runaction/ntuple/create JST WaterPhantom/HitsCollection
+/My/runaction/ntuple/addColumn JST evno I
+##/My/runaction/ntuple/addColumn JST trkid I
+/My/runaction/ntuple/addColumn JST pid I
+/My/runaction/ntuple/addColumn JST de  F  keV
+#/My/runaction/ntuple/addColumn JST dose  F  gray
+#/My/runaction/ntuple/addColumn JST ix  I
+#/My/runaction/ntuple/addColumn JST iy  I
+/My/runaction/ntuple/addColumn JST x  F mm
+/My/runaction/ntuple/addColumn JST y  F mm
+#/My/runaction/ntuple/addColumn JST iz  I
+#/My/runaction/ntuple/addColumn JST w  F
+#/My/runaction/ntuple/addColumn JST proc I
+#/My/runaction/ntuple/addColumn JST ke F MeV
+#######
+
+#======================================================================================
+# [MA] BeamOn
+#======================================================================================
+#
+/run/beamOn 0
+#
+/G4M/Module/select ETCC
+/G4M/Module/dumpToFile ETCCdump.dat
+# --EOF----------------------------------------------------------------------------------

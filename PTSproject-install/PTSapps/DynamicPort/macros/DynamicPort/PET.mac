@@ -1,0 +1,177 @@
+#--------------------------------------------------------------------------------------
+#
+# PET Macro file 
+# All processes are included.
+# 
+#       2016-03   Tsukasa ASO
+#
+#--------------------------------------------------------------------------------------
+#
+#  (PreInit State)
+#
+# -------------------------------------------------------------------------------------
+# [OP]Verbose settings
+# -------------------------------------------------------------------------------------
+/control/verbose 2
+#/run/verbose 2
+#
+#======================================================================================
+# [MA]Material
+#======================================================================================
+/control/execute ./macros/common/materials.mac
+#
+#======================================================================================
+# [MA]PhysicsList
+#======================================================================================
+/control/execute ./macros/common/phys.mac
+#
+#======================================================================================
+# [MA]Particle Therapy System Selection and Beam Module Registration
+#======================================================================================
+/G4M/System DynamicPort
+/control/execute  ./macros/DynamicPort/beamModule.mac
+#
+#======================================================================================
+# [MA]Run Initialize
+#======================================================================================
+/run/initialize
+#
+#
+#  (Idle State)
+#
+#======================================================================================
+# [MA]Beam Module Implmentation
+#======================================================================================
+/G4M/Module/list
+# -----------------------------------------
+# Water Phantom settings and installation
+# ----------------------------------------- 
+## Water Phantom Size (Half length)
+/G4M/Module/Phantom/size 150. 150. 250.0 mm
+## Water Phantom SD Size (Half length) 
+/G4M/Module/Phantom/sdsize 150.0 150.0 250.0 mm
+## Segmentation of water phantom ( Nx, Ny, Nz )
+/G4M/Module/Phantom/dim 1. 1. 1.
+## Installation of WaterPhantom. 
+/G4M/Module/select WaterPhantom
+/G4M/Module/translate 0. 0. 0. mm
+/G4M/Module/install WaterPhantom
+#
+# -----------------------------------------
+# Installation of the other modules
+# ----------------------------------------- 
+#
+/G4M/Module/install PET
+/G4M/Module/select PET
+/G4M/Module/translate 300. 0. 0. mm
+/G4M/Module/rotate 0. 90. 0. deg
+####/G4M/Module/translate 0. 0. 500. mm
+####/G4M/Module/rotate 0. 0. 0. deg
+#
+/G4M/Module/cloneIfExist PET PET2 1 -300 0 0 mm 0 -90 0 deg
+/G4M/Module/cloneIfExist PET PET3 2  0 300 0 mm -90 0 0 deg
+/G4M/Module/cloneIfExist PET PET4 3  0 -300 0 mm 90 0 0 deg
+###
+#======================================================================================
+# [MA] Beam Parameters
+#======================================================================================
+/control/execute macros/DynamicPort/particleGun.mac
+#
+# -------------------------------------------------------------------------------------
+# [OP] ROOT Output file Name
+# -------------------------------------------------------------------------------------
+/My/runaction/hist/enable DICOMCT false
+/My/runaction/hist/enable DICOM   false
+/My/runaction/hist/enable JSTEdep true
+/My/runaction/hist/enable JSTDose true
+#####
+/My/runaction/ntuple/create JST WaterPhantom/HitsCollection
+/My/runaction/ntuple/addColumn JST evno I
+##/My/runaction/ntuple/addColumn JST trkid I
+/My/runaction/ntuple/addColumn JST pid I
+/My/runaction/ntuple/addColumn JST de  F  keV
+#/My/runaction/ntuple/addColumn JST dose  F  gray
+#/My/runaction/ntuple/addColumn JST ix  I 
+#/My/runaction/ntuple/addColumn JST iy  I 
+/My/runaction/ntuple/addColumn JST x  F mm 
+/My/runaction/ntuple/addColumn JST y  F mm
+#/My/runaction/ntuple/addColumn JST iz  I 
+#/My/runaction/ntuple/addColumn JST w  F
+#/My/runaction/ntuple/addColumn JST proc I
+#/My/runaction/ntuple/addColumn JST ke F MeV
+#######
+/My/runaction/ntuple/create PET PET/HitsCollection
+/My/runaction/ntuple/addColumn PET evno I
+/My/runaction/ntuple/addColumn PET trkid I
+/My/runaction/ntuple/addColumn PET pid I
+/My/runaction/ntuple/addColumn PET de  F  keV
+/My/runaction/ntuple/addColumn PET ix  I 
+/My/runaction/ntuple/addColumn PET iy  I 
+/My/runaction/ntuple/addColumn PET iz  I 
+/My/runaction/ntuple/addColumn PET imod  I 
+/My/runaction/ntuple/addColumn PET isec  I 
+/My/runaction/ntuple/addColumn PET x  F mm
+/My/runaction/ntuple/addColumn PET y  F mm
+/My/runaction/ntuple/addColumn PET z  F mm
+/My/runaction/ntuple/addColumn PET ke F MeV
+/My/runaction/ntuple/addColumn PET parenttrkid I
+#
+/My/runaction/dumpfile PET_Sample.root
+######
+/My/evtaction/digi/create DigiVol DigiVolMerger PET/HitsCollection DVMCollection
+/My/evtaction/digi/create DigiCoin DigiCoincidence  DVMCollection DCCoinCollection
+/My/evtaction/digi/select DigiCoin
+/My/evtaction/digi/coincidence/twin  2.0 -1.0  microsecond
+/My/evtaction/digi/coincidence/ewin  0.5 0.25  MeV
+#
+#####
+/My/runaction/ntuple/dc/create PETDC DVMCollection
+/My/runaction/ntuple/addDcColumn PETDC evno I
+/My/runaction/ntuple/addDcColumn PETDC x F
+/My/runaction/ntuple/addDcColumn PETDC y F
+/My/runaction/ntuple/addDcColumn PETDC z F
+/My/runaction/ntuple/addDcColumn PETDC iz  I 
+/My/runaction/ntuple/addDcColumn PETDC desig  F MeV
+/My/runaction/ntuple/addDcColumn PETDC t  F ns
+#
+#####
+/My/runaction/ntuple/dcset/create PETDCS DCCoinCollection
+/My/runaction/ntuple/addDcSetColumn PETDCS evno I
+/My/runaction/ntuple/addDcSetColumn PETDCS x0 F
+/My/runaction/ntuple/addDcSetColumn PETDCS y0 F
+/My/runaction/ntuple/addDcSetColumn PETDCS z0 F
+/My/runaction/ntuple/addDcSetColumn PETDCS x1 F
+/My/runaction/ntuple/addDcSetColumn PETDCS y1 F
+/My/runaction/ntuple/addDcSetColumn PETDCS z1 F
+/My/runaction/ntuple/addDcSetColumn PETDCS iz  I 
+/My/runaction/ntuple/addDcSetColumn PETDCS isec  I 
+/My/runaction/ntuple/addDcSetColumn PETDCS desig0  F MeV
+/My/runaction/ntuple/addDcSetColumn PETDCS desig1  F MeV
+/My/runaction/ntuple/addDcSetColumn PETDCS tsig0  F ns
+/My/runaction/ntuple/addDcSetColumn PETDCS tsig1  F ns
+#
+#======================================================================================
+# [OP] Visualization Settings
+#======================================================================================
+####/control/execute ./macros/common/vis3.mac
+#/vis/viewer/reset
+/vis/open OGL
+/vis/viewer/set/viewpointThetaPhi 0. 0.
+/vis/geometry/set/visibility Room 0 0
+/vis/geometry/set/visibility PET 0 0
+/vis/geometry/set/visibility Module 0 0
+/vis/drawVolume
+/tracking/storeTrajectory 1
+/vis/scene/add/trajectories
+/vis/scene/endOfEventAction accumulate
+#/vis/viewer/flush
+#
+#======================================================================================
+# [MA] BeamOn
+#======================================================================================
+#
+/run/beamOn 0
+#
+/G4M/Module/select PET
+/G4M/Module/dumpToFile PETdump.dat
+# --EOF----------------------------------------------------------------------------------

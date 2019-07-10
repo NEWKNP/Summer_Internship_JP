@@ -1,0 +1,15 @@
+#======================================================================================
+# [MA] Beam Parameters for GPS
+#======================================================================================
+/My/PrimaryGenerator/select GPS
+/gps/particle proton
+/gps/energy   150. MeV
+/gps/direction 0 0 -1 
+/gps/pos/type Beam
+/gps/pos/sigma_x   0.0  mm
+/gps/pos/sigma_y   0.0  mm
+/gps/pos/centre  0. 0. 3500. mm
+/gps/ang/type  beam2d
+/gps/ang/sigma_x   0.  mrad
+/gps/ang/sigma_y   0.  mrad
+#

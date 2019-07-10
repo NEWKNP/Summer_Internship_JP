@@ -1,0 +1,15 @@
+------------------------------------------------------------------------------------
+Material Description
+------------------------------------------------------------------------------------
+Air				  ;Material Name
+Air	0			  ;Chemical Formula,   Material State(Gas 0, Else 1)	
+1.20479e-3	293.15	101325	  ;Density [g/cm3], (Gas
+-1:STP)Temp[kelvin],(Gas -1:STP) Pressure[Pa](Gas)
+-1				  ;Mean Excitation Energy [eV] (-1: Auto calc. in G4)
+4				  ;Number of component
+M   Nitrogen	0.755267  ; Element or Material, Name, Fraction(or natom)
+M   Oxygen	0.231781  ; ..
+M   Argon	0.012827  ; ..
+M   Carbon	0.000124  ; ..
+------------------------------------------------------------------------------------
+

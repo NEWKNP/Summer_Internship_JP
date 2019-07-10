@@ -1,0 +1,22 @@
+#======================================================================================
+# [MA] Beam Module Registration
+#======================================================================================
+#
+# Command                Name          Class              Parameter file                                 Position       Rotation
+#
+/Dynamic/Module/register Room          G4MRoom            ./data/Sample/G4MRoom/room.dat                 0. 0.    0. mm 0. 0. 0. deg
+/Dynamic/Module/register Extract       G4MDisk            ./data/Sample/G4MDisk/extract.dat              0. 0. 3500. mm 0. 0. 0. deg
+#
+/Dynamic/Module/register ScanMagnetX    G4MScanningMagnet  ./data/Sample/G4MScanningMagnet/SCMX.dat       0. 0. 2254.0 mm 0. 0. 0. deg
+/Dynamic/Module/register ScanMagnetY    G4MScanningMagnet  ./data/Sample/G4MScanningMagnet/SCMY.dat       0. 0. 1859.0 mm 0. 0. 0. deg
+#
+/Dynamic/Module/register MLC           G4MMLCX            ./data/Sample/G4MMLCX/mlc.dat                  0. 0. 1000. mm 0. 0. 0. deg
+/Dynamic/Module/register Couch         G4MCouch           ./data/Sample/G4MCouch/couch.dat               0. 0.  -300. mm 0. 0. 0. deg
+#
+#- Sensitive Module
+##/Dynamic/Module/WaterPhantom/register
+/Dynamic/Module/DICOM/register
+#-Alternatively with geometric parameters for Sensitive modules
+/Dynamic/Module/register WaterPhantom  G4MWaterPhantom  ./data/Sample/G4MWaterPhantom/waterphantom.dat 0. 0.  -250. mm 0. 180. 0. deg
+#/Dynamic/Module/register DICOM         G4MDICOM         ./data/Sample/G4MDICOM/dicom.dat               0. 0.    0. mm 0. 0. 0. deg
+#

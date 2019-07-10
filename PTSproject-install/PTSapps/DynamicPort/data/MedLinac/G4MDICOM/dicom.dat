@@ -1,0 +1,15 @@
+./data/Sample/Dicom/DICOM.dat		// DICOM File list
+./data/Sample/Dicom/CT2Density.dat	// CT to Density Lookup table
+./data/common/Dicom/CT2Water.dat	// Parameter type for material assignment
+-1000.  1000.  				// Min/Max CT value. Lower/Larger CT values are replaced to this value.
+-500.   -1000.				// Cut off value of CT for outline extraction. The CT value of outside volue is replaced to the next value (i.e. usally CT value for Air).
+0.01					// Density resolution [g/cm3]
+2.0  					// Cubic Reformation of voxel size in 3D [mm]
+1					// Recombination of voxel size in 2D (Int)
+-200.0 +200.0				// Valid window of Xmin and Xmax in CT image [mm]
+-200.0 +200.0				// Valid window of Ymin and Ymax in CT image [mm]
+trim   					// If "trim" then only volume inside valid window is used for geometry, otherwise the outside of valid window is constructed as the geometry.
+0. 0. 0.				// Position of isocenter in CT frame [mm]
+45.					// Gantry angle in [deg]
+0.					// Couch angle in [deg]
+

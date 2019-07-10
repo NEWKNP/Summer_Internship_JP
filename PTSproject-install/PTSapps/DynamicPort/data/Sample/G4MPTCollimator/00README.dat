@@ -1,0 +1,5 @@
+160. 160. 70.     # full size of envelope in x,y,z
+Brass             # Material of envelope
+1. 1.             # Xpitch, Ypitch
+0                 # Number of data points 
+1 1               # Ixdir, Iydir

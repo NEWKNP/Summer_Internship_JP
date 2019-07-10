@@ -1,0 +1,7 @@
+ID(not used)
+Description(not used)
+Envelope's[Material, xRadius[mm], yRadius[mm], FullThickness[mm]]
+Number of Nodes(Components)
+Node's[Material, positionR[mm], positionA[0-360], Radius[mm], Exist]
+...
+...

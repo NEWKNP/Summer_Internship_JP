@@ -1,0 +1,44 @@
+#### Sector
+161.0 161.0 217.0
+G4_Al
+#### Module (Replication) 1.0mmt Al case + TPCGas
+1 1 1
+159.0 159.0 215.0
+TPCGas
+0.  0.  0.c
+0.  0.  0.
+#### Submodule (Replication) DetctorUnit=uPIC+BGO+PMT
+3 3 1
+53.0  53.0  55.0
+G4_AIR
+-53.0  -53.0  -80.0
+53.0    53.0   0.0
+#### Layer (space for uPIC-Air, Scinti, PMT)
+3
+53.0   53.0  27.0
+G4_AIR
++14.0
+53.0   53.0  13.0
+G4_AIR
+-6.0
+53.0   53.0  15.0
+G4_AIR
+-20.0
+##### Tower for Layer 1 ( uPIC )
+1   1   1
+53.0  53.0   2.0
+G4_POLYACRYLONITRILE  
+0.0   0.0  12.5
+0.0   0.0   0.0
+##### Tower for Layer 2 ( GSO )
+8   8   1
+6.0  6.0  13.0
+GSO
+-21.0   -21.0   0.0
+  6.0   6.0   0.0
+##### Tower for Layer 3 ( PMT )
+1   1   1
+52.0  52.0  15.0
+G4_SILICON_DIOXIDE
+0.0   0.0   0.0
+0.0   0.0   0.0

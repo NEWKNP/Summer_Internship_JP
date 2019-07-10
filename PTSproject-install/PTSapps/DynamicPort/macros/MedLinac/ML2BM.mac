@@ -1,0 +1,14 @@
+/G4M/Module/install TargetA
+/G4M/Module/install TargetB
+/G4M/Module/install MLC
+/G4M/Module/install BeWindow
+/G4M/Module/install FFL6_1
+/G4M/Module/install Mirror
+/G4M/Module/install UpperCollimator
+/G4M/Module/install LowerCollimator
+/G4M/Module/install FFL1A
+/G4M/Module/install JawX1
+/G4M/Module/install JawX2
+/G4M/Module/install JawY1
+/G4M/Module/install JawY2
+/G4M/Module/install IonizationChamber
