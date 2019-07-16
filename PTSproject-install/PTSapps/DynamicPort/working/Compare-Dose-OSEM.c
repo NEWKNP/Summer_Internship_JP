@@ -5,8 +5,8 @@
 
     // input file name
     //ost << "Sample_xy_final.root";//for xyDose
-    //ost << "Sample_yz_final.root";//for yzDose
-    ost << "Sample_xz_final.root";//for xzDose
+    ost << "Sample_yz_final.root";//for yzDose
+    //ost << "Sample_xz_final.root";//for xzDose
 
     const TString rtfile = ost.str();
     cout << rtfile << endl;   // check
@@ -15,27 +15,25 @@
 
     TH2* CImg = (TH2*)fp.Get("nCImg");
     TH2* RPro = (TH2*)fp.Get("nRPro");
+    /*
+    TCanvas* c = new TCanvas("c", "Old Reconstruct Image", 0, 0, 720, 720);
 
-    TCanvas* c = new TCanvas("c", "Z", 0, 0, 720, 720);
-
-    TH2* RIfbp = new TH2F("RIfbp", "Z in YZ", 512, -256, 256, 512, -256, 256);
+    TH2* RIfbp = new TH2F("RIfbp", "OSEM YZ", 512, -256, 256, 512, -256, 256);
     
-    for(i=1; i>=512; i++)
-    //for(i=512; i<=1; i--)
+    for(i=1; i<=512; i++)
     {
         for(j=1; j<=512; j++)
         {
-            if(RPro->GetBinContent(i, j)>= 0.)
+            if(RPro->GetBinContent(i, j) >= 0)
             {
-                RIfbp -> SetBinContent(i, j, RPro->GetBinContent(i, j));
-                //RIfbp -> SetBinContent(j, i, RPro->GetBinContent(j, i));
+                RIfbp->SetBinContent(i, j, RPro->GetBinContent(i, j));
+                //RIfbp->SetBinContent(j, i, RPro->GetBinContent(j, i));
             }
-            else if(RPro->GetBinContent(i, j) < 0.)
+            else if(RPro->GetBinContent(i, j) < 0)
             {
-                RIfbp -> SetBinContent(i, j, 1E-30);
-                //RIfbp -> SetBinContent(j, ji, 1E-30);
+                RIfbp->SetBinContent(i, j, 1E-30);
+                //RIfbp->SetBinContent(j, i, 1E-30);
             }
-            
         }
     }
     RIfbp->SetStats(0);
@@ -45,9 +43,9 @@
     //RIfbp->Draw("colx");  //for Reconstructed Image
     RIfbp->Draw("coly");  //for Reconstructed Image
     //RIfbp->Draw("colz");  //for Reconstructed Image
-
-    TH1* h11 = new TH1F("h11", "Dost Z", 512, -256, 256);
-    TH1* h12 = new TH1F("h12", "OSEM Z", 512, -256, 256);
+    */
+    TH1* h11 = new TH1F("h11", "Dost. Z", 250, -256, 256);
+    TH1* h12 = new TH1F("h12", "OSEM. Z", 512, -256, 256);
     TH1* h13 = new TH1F("h13", "different Z", 512, -256, 256);
     
     Float_t s, ans;
@@ -57,11 +55,13 @@
     for(i=1; i<=512; i++)
     {
         
-        thisBinDose = CImg->GetBinContent(i,257);
+        thisBinDose = CImg->GetBinContent(i,75);
         thisBinRpro = RPro->GetBinContent(i,257);
         //thisBinDose = CImg->GetBinContent(i,i);
         //thisBinRpro = RPro->GetBinContent(i,i);
-        
+
+        //cout << thisBinDose << endl;
+
         if(thisBinRpro < 0.)
         {
             thisBinRpro = 0.;
@@ -105,23 +105,29 @@
 	h14->SetBinContent(i, min);
     }
     
-    Int_t Mh11 = 0;
-    Mh11 = h11->GetMaximumBin();
-    Mh11 = Mh11 - 256;
-    printf("h11MaxbinNumber:%dmm\n", Mh11);
+    Int_t MinH11 = 0, MaxH11 = 0;
+    MinH11 = h11->GetMinimumBin();
+    MaxH11 = h11->GetMaximumBin();
+    MaxH11 = MaxH11 - 256;
+    printf("h11MinbinNumber:%dmm\n", MinH11);
+    printf("h11MaxbinNumber:%dmm\n", MaxH11);
 
-    Int_t Mh12 = 0;
-    Mh12 = h12->GetMaximumBin();
-    Mh12 = Mh12 - 256;
-    printf("h12MaxbinNumber:%dmm\n", Mh12);
+    Int_t MinH12 = 0, MaxH12 = 0;
+    MinH12 = h12->GetMinimumBin();
+    MaxH12 = h12->GetMaximumBin();
+    MaxH12 = MaxH12 - 256;
+    printf("h12MinbinNumber:%dmm\n", MinH12);
+    printf("h12MaxbinNumber:%dmm\n", MaxH12);
 
-    Int_t Mh13 = 0;
-    Mh13 = h13->GetMaximumBin();
-    Mh13 = Mh13 - 256;
-    printf("h12MaxbinNumber:%dmm\n", Mh13);
+    Int_t MinH13 = 0, MaxH13 = 0;
+    MinH13 = h13->GetMaximumBin();
+    MaxH13 = h13->GetMaximumBin();
+    MaxH13 = MaxH13 - 256;
+    printf("h13MinbinNumber:%dmm\n", MinH13);
+    printf("h13MaxbinNumber:%dmm\n", MaxH13);
 
     TCanvas* c1 = new TCanvas("c1", "Compare Dose and OSEM", 0, 0, 720, 720);
-    
+    //h11 set new scale
     h11->SetXTitle("z /mm");
     h11->SetYTitle("Pixel value");
     h11->SetTitleOffset(1.2, "x");

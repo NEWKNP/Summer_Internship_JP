@@ -135,7 +135,7 @@
                 preCPro -> Fill(s, theta);
                 CPro -> Fill(s, theta);
                 
-                //printf("z0(%10.4f, %10.4f), sZ(%10.4f, %10.4f) %10.4f, %10.4f\n", z, y, sZ, sY, s, theta);  // Test
+                //printf("z0(%10.4f, %10.4f), sZ(%10.4f, %10.4f) %10.4f, %10.4f\n", x, z, sX, sZ, s, theta);  // Test
             }
             
             //roop end
