@@ -183,7 +183,8 @@ git remote add <your command name> <your github repository link>
 
 # debug (If git push is error)
 git fetch <your command name> master
-git merge --allow-unrelated-histories
+git merge --allow-unrelated-histories <your command name>/master
+:q
 
 # push your repository
 git push <your command name> master
